@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lottery</title>
+    <script src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\jspsych.js"></script>
+    <script
+        src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-html-keyboard-response.js"></script>
+    <script
+        src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-image-keyboard-response.js"></script>
+    <script
+        src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-image-slider-response.js"></script>
+    <script src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-xab.js"></script>
+    <script
+        src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-binary-choice-shifted.js"></script>
+    <script src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-fullscreen.js"></script>
+    <script
+        src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jspsych-combinations.js"></script>
+    <script src="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\plugins\jquery-3.5.1.min.js"></script>
+    <link href="C:\Users\Josh\OneDrive\Documents\Neuroecon Lab\JavaScript_Exps\css2\jspsych.css" rel="stylesheet"
+        type="text/css">
+    </link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="myChart" width='100' height='100'></canvas>
+</head>
+
+<body>
+</body>
+<script>
+    /*Study Parameters */
+
+
+
+    /* create timeline */
+    var timeline = [];
+
+    // Fullscreen 
+    var fullscreen = {
+        type: 'fullscreen',
+        fullscreen_mode: true
+    };
+    timeline.push(fullscreen);
+
+    /* define welcome message trial */
+
+    var welcome = {
+        type: "html-keyboard-response",
+        stimulus: "Welcome to the experiment. Press the spacebar to begin.",
+        choices: [32]
+    };
+    timeline.push(welcome);
+
+    /** Fixation */
+
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 250,
+    };
+
+    // Create lottery stimulus files
+
+    var lowA_lottery_imgs = [];
+    for (var i = 1; i <= 10; i++) {
+        if (i === 1 || i == 9 || i == 10) {
+            continue;
+        };
+        lowA_lottery_imgs.push('Lottery_Imgs/LowA' + i * 10 + 'percent.jpg');
+    }
+    var lowB_lottery_imgs = [];
+    for (var i = 1; i <= 10; i++) {
+        if (i === 1 || i == 9 || i == 10) {
+            continue;
+        };
+        lowB_lottery_imgs.push('Lottery_Imgs/LowB' + i * 10 + 'percent.jpg');
+    }
+    
+    var low_lott_pairs = [
+        [lowA_lottery_imgs[0], lowB_lottery_imgs[0]],
+        [lowA_lottery_imgs[1], lowB_lottery_imgs[1]],
+        [lowA_lottery_imgs[2], lowB_lottery_imgs[2]],
+        [lowA_lottery_imgs[3], lowB_lottery_imgs[3]],
+        [lowA_lottery_imgs[4], lowB_lottery_imgs[4]],
+        [lowA_lottery_imgs[5], lowB_lottery_imgs[5]],
+        [lowA_lottery_imgs[6], lowB_lottery_imgs[6]]
+    ] 
+    /*
+    var low_lott_pairs = [];
+    for (j = 0; j < lowA_lottery_imgs.length - 1; j++) {
+        var a = lowA_lottery_imgs;
+        var b = lowB_lottery_imgs;
+        var c = low_lott_pairs;
+        c.push({
+            stim1: a[j],
+            stim2: b[j],
+            mag: "low",
+            twoLott: true,
+            perc: 20 + (j * 10) // % chance of getting the higher value
+        })
+    };
+    */
+    var highA_lottery_imgs = [];
+    for (var i = 1; i <= 10; i++) {
+        if (i === 1 || i == 9 || i == 10) {
+            continue;
+        };
+        highA_lottery_imgs.push('Lottery_Imgs/HighA' + i * 10 + 'percent.jpg');
+    }
+    var highB_lottery_imgs = [];
+    for (var i = 1; i <= 10; i++) {
+        if (i === 1 || i == 9 || i == 10) {
+            continue;
+        };
+        highB_lottery_imgs.push('Lottery_Imgs/HighB' + i * 10 + 'percent.jpg');
+    }
+    
+    var high_lott_pairs = [
+        [highA_lottery_imgs[0], highB_lottery_imgs[0]],
+        [highA_lottery_imgs[1], highB_lottery_imgs[1]],
+        [highA_lottery_imgs[2], highB_lottery_imgs[2]],
+        [highA_lottery_imgs[3], highB_lottery_imgs[3]],
+        [highA_lottery_imgs[4], highB_lottery_imgs[4]],
+        [highA_lottery_imgs[5], highB_lottery_imgs[5]],
+        [highA_lottery_imgs[6], highB_lottery_imgs[6]]
+    ] 
+    var lowEV_pairs = [["Lottery_Imgs/1.60lowGam.jpg","Lottery_Imgs/1.60lowSure.jpg"],
+    ["Lottery_Imgs/2.00lowGam.jpg", "Lottery_Imgs/2.00lowSure.jpg"]];
+    var highEV_pairs = [["Lottery_Imgs/1.60highGam.jpg","Lottery_Imgs/1.60highSure.jpg"],
+    ["Lottery_Imgs/2.00highGam.jpg", "Lottery_Imgs/2.00highSure.jpg"]];
+
+    /*
+    var high_lott_pairs = [];
+    for (j = 0; j < highA_lottery_imgs.length - 1; j++) {
+        var a = highA_lottery_imgs;
+        var b = highB_lottery_imgs;
+        var c = high_lott_pairs;
+        c.push({
+            stim1: a[j],
+            stim2: b[j],
+            mag: "high",
+            twoLott: true,
+            perc: 20 + (j * 10) // % chance of getting the higher value
+        })
+    };
+    var lowEV_pairs = [];
+    lowEV_pairs.push({
+        stim1: "Lottery_Imgs/1.60lowGam.jpg",
+        stim2: "Lottery_Imgs/1.60lowSure.jpg",
+        mag: "high",
+        twoLott: false,
+        baseVal: 1.6
+    });
+    lowEV_pairs.push({
+        stim1: "Lottery_Imgs/2.00lowGam.jpg",
+        stim2: "Lottery_Imgs/2.00lowSure.jpg",
+        mag: "high",
+        twoLott: false,
+        baseVal: 2
+    })
+    var highEV_pairs = [];
+    highEV_pairs.push({
+        stim1: "Lottery_Imgs/1.60highGam.jpg",
+        stim2: "Lottery_Imgs/1.60highSure.jpg",
+        mag: "high",
+        twoLott: false,
+        baseVal: 1.6
+    })
+    highEV_pairs.push({
+        stim1: "Lottery_Imgs/2.00highGam.jpg",
+        stim2: "Lottery_Imgs/2.00highSure.jpg",
+        mag: "high",
+        twoLott: false,
+        baseVal: 2
+    }) */
+
+
+    //INSTRUCTIONS AND PRACTICE SCREENS
+
+    var instructions1 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>In this experiment, you will make decisions between pairs of " +
+            "gambles. Four of these gambles will be used to determine your reward, " +
+            "and you will be told which four gambles these are. One of these gambles will " +
+            "be chosen at random and played out at the end of the experiment, and " +
+            "your reward will be determined based on that gamble's outcome.</p>" +
+            "<p>The four other gambles are hypothetical: they will not impact the reward " +
+            "you receive.</p>" +
+            "<p>Press the spacebar to continue.</p>",
+        post_trial_gap: 2000,
+        choices: [32]
+    };
+    timeline.push(instructions1);
+
+    var instructions2 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>In some rounds, one of the gambles will be a completely filled-in pie " +
+            "chart with one number displayed in the center of the pie. The outcome of these " +
+            "gambles is that value with 100% probability.</p>" +
+            "<p>Press the spacebar to continue.</p>",
+        post_trial_gap: 2000,
+        choices: [32]
+    };
+    timeline.push(instructions2);
+
+
+    var instructions3 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>You will now see an example round. First, a cross will be displayed in " +
+            "the center of the screen. Then, two gambles will be shown on the screen, " +
+            "and you will select which gamble you would prefer to play.</p><p>Use the <b>F</b> key to " +
+            "choose the gamble on the left and the <b>J</b> key to choose the gamble on the right.</p>" +
+            "<p>The possible outcomes of the gamble are shown in text, and the probability of each " +
+            "outcome is represented by the proportion of the pie in which that text lies.</p>" +
+            "<p>Press the spacebar to continue.</p>",
+        choices: [32]
+    };
+    timeline.push(instructions3);
+
+
+    var example = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: "<p>In this example, both gambles have a probability of 0.3 (30% chance) for " +
+                    "the larger reward and a probability of 0.7 (70% chance) for the smaller reward.</p>" +
+                    "<p>Note that in the actual rounds, you will <b>NOT</b> be told the probability of " +
+                    "each outcome. You must use the relative sizes of the pie to make your choice.</p>" +
+                    "<p>Rest your fingers on the F and J keys, and press the spacebar to begin the example round.</p>",
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: high_lott_pairs[1],
+                choices: ["F", "J"]
+            }
+        ]
+    };
+    timeline.push(example);
+
+    var instructions4 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>You will now complete a practice round to ensure that you understand " +
+            "how the gambles work. In this round, we want you to choose the <b>riskier</b> " +
+            "gamble. That is, choose the gamble that has a lower chance to win a higher amount. " +
+            "Be sure to take in the information in each gamble, but try to respond within about " +
+            "5 seconds. We will let you know if your response was too slow.</p>" +
+            "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
+        choices: [32]
+    };
+    timeline.push(instructions4);
+
+    var practice1 = {
+        type: "binary-choice-shifted",
+        stimulus: low_lott_pairs[0],
+        choices: ["F", "J"]
+    };
+    timeline.push(fixation, practice1);
+
+    var practice2 = {
+        type: 'binary-choice-shifted',
+        stimulus: high_lott_pairs[0],
+        choices: ["F", "J"]
+    };
+
+    var practice3 = {
+        type: "binary-choice-shifted",
+        stimulus: low_lott_pairs[1],
+        choices: ["F", "J"]
+    }
+
+    var err_slow = {
+        type: 'html-keyboard-response',
+        stimulus: "<p>Whoops! You responded too slowly. Let's try that again. " +
+            "Please rest your fingers on the F and J keys, and press the spacebar to " +
+            "retry the practice trial. Remember, choose the <b>riskier</b> gamble.</p>",
+        choices: [32]
+    };
+
+    var err_fast = {
+        type: "html-keyboard-response",
+        stimulus: "<p>Whoops! You responded too quickly. Let's try that again. " +
+            "Please rest your fingers on the F and J keys, and press the spacebar to " +
+            "retry the practice trial. Remember, choose the <b>riskier</b> gamble.</p>",
+        chocies: [32]
+    };
+
+    var err_slow_last = {
+        type: "html-keyboard-response",
+        stimulus: `<p>Your response was too slow. For the actual task, please try to respond more quickly.</p>
+            <p>Press the space bar to continue.</p>`,
+        choices: [32]
+    };
+
+    var err_fast_last = {
+        type: "html-keyboard-response",
+        stimulus: `<p>Your response was too fast. For the actual task, please try to take in the information before making a response.</p>
+            <p>Press the space bar to continue.</p>`,
+        choices: [32]
+    };
+
+    var err_acc = {
+        type: "html-keyboard-response",
+        stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the <b>riskier</b> gamble. In " +
+            "other words, choose the gamble that has a smaller chance of giving out a higher reward.</p>" +
+            "<p>Press the space bar to continue.</p>",
+        choices: [32]
+    };
+
+    var err_acc_last = {
+        type: 'html-keyboard response',
+        stimulus: "<p>You failed to choose the riskier gamble. Remember, the chance that an outcome will occur " +
+            "given a specific gamble is the proportion of pie corresponding to that value.</p>" +
+            "<p>Press the space bar to continue.</p>",
+        choices: [32]
+    };
+
+    //CONDITIONAL STATEMENTS FOR PRACTICE
+
+    var conditional_fast = {
+        timeline: [err_fast, fixation, practice2],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.rt >= 500) {
+                window.fast1 = false;
+                return false;
+            } else {
+                window.fast1 = true;
+                return true;
+            }
+        }
+    };
+    timeline.push(conditional_fast);
+
+    var conditional_slow = {
+        timeline: [err_slow, fixation, practice2],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.rt <= 5500 || fast1 == true) {
+                window.slow1 = false;
+                return false;
+            } else {
+                window.slow1 = true;
+                return true;
+            }
+        }
+    };
+    timeline.push(conditional_slow);
+
+    var conditional_incorrect = {
+        timeline: [err_acc, fixation, practice2],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f') && fast1 != true && slow1 != true) {
+                window.acc = false;
+                return true;
+            } else {
+                window.acc = true;
+                return false;
+            }
+        }
+    };
+    timeline.push(conditional_incorrect);
+
+    var conditional2_slow = {
+        timeline: [err_slow, fixation, practice3],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.rt <= 5500) {
+                window.slow2 = false;
+                return false;
+            } else {
+                window.slow2 = true;
+                return true;
+            }
+        }
+    };
+    timeline.push(conditional2_slow);
+
+    var conditional2_fast = {
+        timeline: [err_fast, fixation, practice3],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.rt >= 500 || slow2 == true) {
+                window.fast2 = false;
+                return false;
+            } else {
+                window.fast2 = true;
+                return true;
+            }
+        }
+    };
+    timeline.push(conditional2_fast);
+
+    var conditional2_incorrect = {
+        timeline: [err_acc, fixation, practice3],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (acc == false && data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f') && fast2 != true && slow2 != true) {
+                window.acc2 = false;
+                return true;
+            } else {
+                window.acc2 = true;
+                return false;
+            }
+        }
+    };
+    timeline.push(conditional2_incorrect);
+
+    var conditional3_slow = {
+        timeline: [err_slow_last],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.rt <= 5500) {
+                window.slow3 = false;
+                return false;
+            } else {
+                window.slow3 = true;
+                return true;
+            }
+        }
+    };
+    timeline.push(conditional3_slow);
+
+
+
+    var conditional3_fast = {
+        timeline: [err_fast_last],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (data.rt >= 500 || slow3 == true) {
+                window.fast3 = false;
+                return false;
+            } else {
+                window.fast3 = true;
+                return true;
+            }
+        }
+    };
+    timeline.push(conditional3_fast);
+
+    var conditional3_incorrect = {
+        timeline: [err_acc_last],
+        conditional_function: function () {
+            var data = jsPsych.data.get().last(1).values()[0];
+            if (acc2 == false && data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f') && fast3 != true && slow3 != true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    timeline.push(conditional3_incorrect);
+
+
+    var practiceEnd = {
+        type: 'html-keyboard-response',
+        stimulus: `<p>You have completed the practice section. You will now begin the main task. </p>
+            <p>Remember to keep your fingers on the <b>F</b> and <b>J</b> keys before you begin each round.<p>
+            <p>Press the space bar to begin the task.</p>`,
+        choices: ['space']
+    };
+    timeline.push(practiceEnd);
+
+
+    // REAL / HYPOTHETICAL INSTRUCTIONS
+
+    var realInstruc =
+        "<p>The following decision will use <strong>REAL</strong> gambles, " +
+        "which means that the gamble you choose could be used at the " +
+        "end of the experiment to determine your reward.</p>" +
+        "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
+
+    var hypInstruc =
+        "<p>The following decision will use <strong>HYPOTHETICAL</strong> gambles, " +
+        "which means that the gamble you choose will <strong>NOT</strong> be used at the " +
+        "end of the experiment to determine your reward.</p>" +
+        "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
+
+
+/*
+    // LOTTERY PROCEDURES [TESTING HERE]
+
+   // var counterBal = Math.random;
+   var counterBal = .3;
+    var lottery_procedure1 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"],
+                on_finish : (data) => {
+                    data.stimulus = lottery_procedure1.timeline[1].stimulus
+                }
+            }
+        ],
+        timeline_variables: [
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2), mag : "low", twoLott : true, isReal : true, perc : 60 },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2), mag : "high", twoLott : true, isReal : true, perc : 60 }
+           /* { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) } 
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if (counterBal < 0.5) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    timeline.push(lottery_procedure1);
+
+/*
+    var lottery_procedure2 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"]
+            }
+        ],
+        timeline_variables: [
+            { instruc: hypInstruc, choice : jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 1) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([high_lott_pairs[4].stim1, high_lott_pairs[4].stim2], 2) }
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([lowEV_pairs[0].stim1, lowEV_pairs[0].stim2], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([highEV_pairs[0].stim1, highEV_pairs[0].stim2], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([low_lott_pairs[5].stim1, low_lott_pairs[5].stim2], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([high_lott_pairs[5].stim1, high_lott_pairs[5].stim2], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([lowEV_pairs[1].stim1, lowEV_pairs[1].stim2], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([highEV_pairs[1].stim1, highEV_pairs[1].stim2], 2) }
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if (counterBal < 0.5) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
+    timeline.push(lottery_procedure2); 
+
+    var endChoice = {
+        type: "html-keyboard-response",
+        stimulus: "<p>You have completed the task. Press the spacebar to see your reward based on a " +
+            "randomly selected <b>REAL</b> round.</p>",
+        choices: [32]
+    };
+    timeline.push(endChoice);
+
+    var rewardScreen = {
+        type: "image-keyboard-response",
+        stimulus: [],
+        choices: [32],
+        on_start: stimulus => {
+
+        }
+    };
+    timeline.push(rewardScreen); */
+
+     // LOTTERY PROCEDURES [THIS WORKS]
+
+    var counterBal = Math.random;
+    var lottery_procedure1 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"],
+            }
+        ],
+        timeline_variables: [
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2)},
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2)},
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) } 
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if (counterBal < 0.5) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    timeline.push(lottery_procedure1);
+
+
+    var lottery_procedure2 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"]
+            }
+        ],
+        timeline_variables: [
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2)},
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2)},
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) } 
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if (counterBal < 0.5) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
+    timeline.push(lottery_procedure2); 
+
+
+    var end = {
+        type: "html-keyboard-response",
+        stimulus: "<p>You have completed the task. Press any key to exit.</p>"
+    };
+    timeline.push(end);
+
+    jsPsych.init({
+        timeline: timeline,
+        on_finish: function () {
+            //jsPsych.data.get().localSave('csv', 'mydata.csv');
+            //saveData("experiment_data", jsPsych.data.get().csv()); 
+            // code to define the experiment structure would go here...
+        }
+    });
+
+</script>
+
+</html>

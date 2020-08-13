@@ -1,0 +1,8 @@
+Lottery Task
+1. Create array of possible lottery values
+2. Randomly draw from array
+3. Dynamically create stimuli (if this is possible?)
+otherwise,
+1. Create array of possible lottery values
+2. Create all possible lotteries and assign labels
+3. Randomly draw
