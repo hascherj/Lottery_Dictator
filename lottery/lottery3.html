@@ -59,6 +59,12 @@
         trial_duration: 250,
     };
 
+    // Pick a random key from an object
+    var randomProperty = function (obj) {
+        var keys = Object.keys(obj);
+        return obj[keys[ keys.length * Math.random() << 0]];
+    };
+
     // Create lottery stimulus files
 
     var lowA_lottery_imgs = [];
@@ -85,7 +91,7 @@
         [lowA_lottery_imgs[5], lowB_lottery_imgs[5]],
         [lowA_lottery_imgs[6], lowB_lottery_imgs[6]]
     ] 
-    
+    /*
     var low_lott_pairs = [];
     for (j = 0; j < lowA_lottery_imgs.length - 1; j++) {
         var a = lowA_lottery_imgs;
@@ -99,7 +105,7 @@
             perc: 20 + (j * 10) // % chance of getting the higher value
         })
     };
-    
+    */
     var highA_lottery_imgs = [];
     for (var i = 1; i <= 10; i++) {
         if (i === 1 || i == 9 || i == 10) {
@@ -113,8 +119,8 @@
             continue;
         };
         highB_lottery_imgs.push('Lottery_Imgs/HighB' + i * 10 + 'percent.jpg');
-    }
-    /*
+    } 
+    
     var high_lott_pairs = [
         [highA_lottery_imgs[0], highB_lottery_imgs[0]],
         [highA_lottery_imgs[1], highB_lottery_imgs[1]],
@@ -128,7 +134,7 @@
     ["Lottery_Imgs/2.00lowGam.jpg", "Lottery_Imgs/2.00lowSure.jpg"]];
     var highEV_pairs = [["Lottery_Imgs/1.60highGam.jpg","Lottery_Imgs/1.60highSure.jpg"],
     ["Lottery_Imgs/2.00highGam.jpg", "Lottery_Imgs/2.00highSure.jpg"]];
-    */
+    
     /*
     var high_lott_pairs = [];
     for (j = 0; j < highA_lottery_imgs.length - 1; j++) {
@@ -172,8 +178,8 @@
         mag: "high",
         twoLott: false,
         baseVal: 2
-    }) 
-    */
+    }) */
+
 
     //INSTRUCTIONS AND PRACTICE SCREENS
 
@@ -495,8 +501,8 @@
     // LOTTERY PROCEDURES [TESTING HERE]
 
    // var counterBal = Math.random;
-   //var counterBal = .7;
-  /*  var lottery_procedure1 = {
+   var counterBal = .3;
+   var lottery_procedure1 = {
         timeline: [
             {
                 type: "html-keyboard-response",
@@ -509,19 +515,22 @@
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish : (data) => {
-                    data.stimulus = lottery_procedure1.timeline[1].stimulus
-                }
+                    data.mag = jsPsych.timelineVariable('mag', true);
+                    data.twoLott = jsPsych.timelineVariable('twoLott', true);
+                    data.isReal = jsPsych.timelineVariable('isReal', true);
+                    data.perc = jsPsych.timelineVariable('perc', true);
+                    }
             }
         ],
         timeline_variables: [
             { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2), mag : "low", twoLott : true, isReal : true, perc : 60 },
             { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2), mag : "high", twoLott : true, isReal : true, perc : 60 },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) } 
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2), mag : "low", twoLott : false, isReal: true, perc: NaN },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2), mag : "high", twoLott : false, isReal : true, perc : NaN },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2), mag : "low", twoLott: true, isReal : false, perc : 70 },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2), mag : "high", twoLott: true, isReal : false, perc : 70 },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2), mag : "low", twoLott: false, isReal : false, perc : NaN },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2), mag : "high", twoLott: false, isReal : false, perc : NaN } 
         ],
         randomize_order: true,
         conditional_function: function () {
@@ -534,7 +543,7 @@
     };
     timeline.push(lottery_procedure1);
 
-
+    /*
     var lottery_procedure2 = {
         timeline: [
             {
@@ -569,7 +578,7 @@
         }
     };
     timeline.push(lottery_procedure2); 
-
+*/
     var endChoice = {
         type: "html-keyboard-response",
         stimulus: "<p>You have completed the task. Press the spacebar to see your reward based on a " +
@@ -578,90 +587,28 @@
     };
     timeline.push(endChoice);
 
+
     var rewardScreen = {
-        type: "image-keyboard-response",
-        stimulus: [],
-        choices: [32],
-        on_start: stimulus => {
-
-        }
+        type: "html-keyboard-response",
+        on_start: function(data){
+            rewardData = jsPsych.data.get().filter({trial_type: 'binary-choice-shifted', isReal: true}).values();
+            rewardObj = jsPsych.randomization.sampleWithoutReplacement(rewardData, 1)[0];
+            if(rewardObj.key_press === 70){
+            rewardStim = rewardObj.stimulus[0];
+            }else{
+            rewardStim = rewardObj.stimulus[1];
+            };
+        },
+        stimulus: () => {x = "<p>The following gamble was chosen randomly to determine your reward:</p>" +
+        "<div style = 'float: center;'>" +
+        "<img id = 'img' style = 'width: 350px; height: 350px;'></img></div>";
+        rewardStim = [];
+        document.getElementById('img').src = rewardStim;
+        return x},
+        choices: [32]        
     };
-    timeline.push(rewardScreen); */
+    timeline.push(rewardScreen); 
 
-     // LOTTERY PROCEDURES [THIS WORKS]
-    
-    var counterBal = Math.random;
-    var lottery_procedure1 = {
-        timeline: [
-            {
-                type: "html-keyboard-response",
-                stimulus: jsPsych.timelineVariable('instruc'),
-                choices: [32]
-            },
-            fixation,
-            {
-                type: "binary-choice-shifted",
-                stimulus: jsPsych.timelineVariable('choice'),
-                choices: ["F", "J"],
-            }
-        ],
-        timeline_variables: [
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2)},
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2)},
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) } 
-        ],
-        randomize_order: true,
-        conditional_function: function () {
-            if (counterBal < 0.5) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    };
-    //timeline.push(lottery_procedure1);
-
-
-    var lottery_procedure2 = {
-        timeline: [
-            {
-                type: "html-keyboard-response",
-                stimulus: jsPsych.timelineVariable('instruc'),
-                choices: [32]
-            },
-            fixation,
-            {
-                type: "binary-choice-shifted",
-                stimulus: jsPsych.timelineVariable('choice'),
-                choices: ["F", "J"]
-            }
-        ],
-        timeline_variables: [
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2)},
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2)},
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) } 
-        ],
-        randomize_order: true,
-        conditional_function: function () {
-            if (counterBal < 0.5) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    };
-    //timeline.push(lottery_procedure2); 
-    
 
     var end = {
         type: "html-keyboard-response",
