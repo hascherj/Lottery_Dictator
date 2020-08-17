@@ -85,7 +85,7 @@
         [lowA_lottery_imgs[5], lowB_lottery_imgs[5]],
         [lowA_lottery_imgs[6], lowB_lottery_imgs[6]]
     ] 
-    /*
+    
     var low_lott_pairs = [];
     for (j = 0; j < lowA_lottery_imgs.length - 1; j++) {
         var a = lowA_lottery_imgs;
@@ -99,7 +99,7 @@
             perc: 20 + (j * 10) // % chance of getting the higher value
         })
     };
-    */
+    
     var highA_lottery_imgs = [];
     for (var i = 1; i <= 10; i++) {
         if (i === 1 || i == 9 || i == 10) {
@@ -114,7 +114,7 @@
         };
         highB_lottery_imgs.push('Lottery_Imgs/HighB' + i * 10 + 'percent.jpg');
     }
-    
+    /*
     var high_lott_pairs = [
         [highA_lottery_imgs[0], highB_lottery_imgs[0]],
         [highA_lottery_imgs[1], highB_lottery_imgs[1]],
@@ -128,8 +128,8 @@
     ["Lottery_Imgs/2.00lowGam.jpg", "Lottery_Imgs/2.00lowSure.jpg"]];
     var highEV_pairs = [["Lottery_Imgs/1.60highGam.jpg","Lottery_Imgs/1.60highSure.jpg"],
     ["Lottery_Imgs/2.00highGam.jpg", "Lottery_Imgs/2.00highSure.jpg"]];
-
-    /*
+    */
+    
     var high_lott_pairs = [];
     for (j = 0; j < highA_lottery_imgs.length - 1; j++) {
         var a = highA_lottery_imgs;
@@ -172,7 +172,7 @@
         mag: "high",
         twoLott: false,
         baseVal: 2
-    }) */
+    }) 
 
 
     //INSTRUCTIONS AND PRACTICE SCREENS
@@ -257,7 +257,7 @@
             "how the gambles work. In this round, we want you to choose the <b>riskier</b> " +
             "gamble. That is, choose the gamble that has a lower chance to win a higher amount. " +
             "Be sure to take in the information in each gamble, but try to respond within about " +
-            "5 seconds. We will let you know if your response was too slow.</p>" +
+            "5 seconds. We will let you know if your response was too fast or too slow.</p>" +
             "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
         choices: [32]
     };
@@ -268,7 +268,7 @@
         stimulus: low_lott_pairs[0],
         choices: ["F", "J"]
     };
-    timeline.push(fixation, practice1);
+    //timeline.push(fixation, practice1);
 
     var practice2 = {
         type: 'binary-choice-shifted',
@@ -321,7 +321,7 @@
     };
 
     var err_acc_last = {
-        type: 'html-keyboard response',
+        type: 'html-keyboard-response',
         stimulus: "<p>You failed to choose the riskier gamble. Remember, the chance that an outcome will occur " +
             "given a specific gamble is the proportion of pie corresponding to that value.</p>" +
             "<p>Press the space bar to continue.</p>",
@@ -491,12 +491,12 @@
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
 
-/*
+
     // LOTTERY PROCEDURES [TESTING HERE]
 
    // var counterBal = Math.random;
-   var counterBal = .3;
-    var lottery_procedure1 = {
+   var counterBal = .7;
+  /*  var lottery_procedure1 = {
         timeline: [
             {
                 type: "html-keyboard-response",
@@ -515,8 +515,8 @@
         ],
         timeline_variables: [
             { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2), mag : "low", twoLott : true, isReal : true, perc : 60 },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2), mag : "high", twoLott : true, isReal : true, perc : 60 }
-           /* { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2), mag : "high", twoLott : true, isReal : true, perc : 60 },
+            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
             { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
             { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
             { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
@@ -532,9 +532,9 @@
             }
         }
     };
-    timeline.push(lottery_procedure1);
+    timeline.push(lottery_procedure1);*/
 
-/*
+
     var lottery_procedure2 = {
         timeline: [
             {
@@ -550,8 +550,8 @@
             }
         ],
         timeline_variables: [
-            { instruc: hypInstruc, choice : jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 1) },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([high_lott_pairs[4].stim1, high_lott_pairs[4].stim2], 2) }
+            { instruc: hypInstruc, choice : jsPsych.randomization.sampleWithoutReplacement([highEV_pairs[1].stim1, highEV_pairs[1].stim2], 2) },
+            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([high_lott_pairs[4].stim1, high_lott_pairs[4].stim2], 2) },
             { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([lowEV_pairs[0].stim1, lowEV_pairs[0].stim2], 2) },
             { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([highEV_pairs[0].stim1, highEV_pairs[0].stim2], 2) },
             { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement([low_lott_pairs[5].stim1, low_lott_pairs[5].stim2], 2) },
@@ -586,10 +586,10 @@
 
         }
     };
-    timeline.push(rewardScreen); */
+    timeline.push(rewardScreen); 
 
      // LOTTERY PROCEDURES [THIS WORKS]
-
+    /*
     var counterBal = Math.random;
     var lottery_procedure1 = {
         timeline: [
@@ -624,7 +624,7 @@
             }
         }
     };
-    timeline.push(lottery_procedure1);
+    //timeline.push(lottery_procedure1);
 
 
     var lottery_procedure2 = {
@@ -660,8 +660,8 @@
             }
         }
     };
-    timeline.push(lottery_procedure2); 
-
+    //timeline.push(lottery_procedure2); 
+    */
 
     var end = {
         type: "html-keyboard-response",
