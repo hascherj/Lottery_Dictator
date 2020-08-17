@@ -177,6 +177,18 @@
 
     //INSTRUCTIONS AND PRACTICE SCREENS
 
+    var instructions0 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>This experiment will involve monetary decisions using a point system. Any outcomes " +
+            "of the experiment will be in points, which will then be converted to USD ($) once the experiment " +
+            "ends. The conversion rate from experimental points to USD is:</p>" +
+            "<p><b>1 Point = $0.XX</b></p>" +
+            "<p>Press the spacebar to continue.</p>",
+        post_trial_gap: 2000,
+        choices: [32]
+    };
+    timeline.push(instructions0);
+    
     var instructions1 = {
         type: "html-keyboard-response",
         stimulus: "<p>In this experiment, you will make decisions between pairs of " +

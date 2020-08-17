@@ -71,12 +71,24 @@
 
     //INSTRUCTIONS AND PRACTICE SCREENS
 
+    var instructions0 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>This experiment will involve monetary decisions using a point system. Any outcomes " +
+            "of the experiment will be in points, which will then be converted to USD ($) once the experiment " +
+            "ends. The conversion rate from experimental points to USD is:</p>" +
+            "<p><b>1 Point = $0.XX</b></p>" +
+            "<p>Press the spacebar to continue.</p>",
+        post_trial_gap: 2000,
+        choices: [32]
+    };
+    timeline.push(instructions0);
+
     var instructions1 = {
         type: "html-keyboard-response",
         stimulus: "<p>In this experiment, you will be making decisions about how " +
             "much money you would like to donate to a charity of your choice. At the start of " +
             "each round, you will be told that you are given some amount of money. " +
-            "Then, you will decide between two different allocations of that money.</p>" +
+            "Then, you will decide between two different divisions of that money.</p>" +
             "<p>Press the spacebar to continue.</p>",
         post_trial_gap: 2000,
         choices: [32]
@@ -85,7 +97,7 @@
 
     var instructions2 = {
         type: "html-keyboard-response",
-        stimulus: "<p>One allocation will be shown on the left side of the screen, and the other will " +
+        stimulus: "<p>One division will be shown on the left side of the screen, and the other will " +
             "be shown on the right. The percentage of the total amount of money that you " +
             "keep will be represented by the upper bar graph (in blue), and the percentage that will be " +
             "donated will be represented by the lower bar graph (in red).</p><p>Here is an example " +
@@ -116,9 +128,9 @@
     var instructions4 = {
         type: "html-keyboard-response",
         stimulus: "<p>You will now see an example round. First, a cross will be displayed in " +
-            "the center of the screen. Then, two allocations will be shown on the screen, " +
+            "the center of the screen. Then, two divisions will be shown on the screen, " +
             "and you will select which one you would prefer.</p><p>Use the <b>F</b> key to " +
-            "choose the allocation on the left and the <b>J</b> key to choose the allocation on the right.</p>" +
+            "choose the division on the left and the <b>J</b> key to choose the division on the right.</p>" +
             "<p>You will be told the total amount of money before each round.</p>" +
             "<p>Press the spacebar to continue.</p>",
         choices: [32]
@@ -130,8 +142,8 @@
         timeline: [
             {
                 type: "html-keyboard-response",
-                stimulus: "<p>In this example, the total amount of money is $10.00. The right allocation " +
-                    "is 75% ($7.50) for you and 25% ($2.50) for the charity, while the left allocation is " +
+                stimulus: "<p>In this example, the total amount of money is $10.00. The right division " +
+                    "is 75% ($7.50) for you and 25% ($2.50) for the charity, while the left division is " +
                     "95% ($9.50) for you and 5% ($0.50) for the charity.</p>" +
                     "<p>Note that in the actual rounds, you will <b>NOT</b> be told the actual percentages of " +
                     "each graph. You must use the relative sizes of the graphs to make your choice.</p>" +
@@ -151,10 +163,10 @@
     var instructions5 = {
         type: "html-keyboard-response",
         stimulus: "<p>You will now complete a practice round to ensure that you understand " +
-            "how the graphs work. In this round, we want you to choose the <b>more selfish</b> " +
-            "allocation. That is, choose the side that gives more money to you and less to the charity. " +
+            "how the graphs work. In this round, we want you to choose the " +
+            "division of money that gives more money to you and less to the charity. " +
             "Be sure to take in the information in each side, but try to respond within about " +
-            "5 seconds. We will let you know if your response was too slow.</p>" +
+            "5 seconds. We will let you know if your response was too fast or too slow.</p>" +
             "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
         choices: [32]
     };
@@ -183,7 +195,7 @@
         type: 'html-keyboard-response',
         stimulus: "<p>Whoops! You responded too slowly. Let's try that again. " +
             "Please rest your fingers on the F and J keys, and press the spacebar to " +
-            "retry the practice trial. Remember, choose the <b>more selfish</b> side.</p>",
+            "retry the practice trial. Remember, choose the side that gives more to you and less to the charity.</p>",
         choices: [32]
     };
 
@@ -191,7 +203,7 @@
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. Let's try that again. " +
             "Please rest your fingers on the F and J keys, and press the spacebar to " +
-            "retry the practice trial. Remember, choose the <b>more selfish</b> side.</p>",
+            "retry the practice trial. Remember, choose the side that gives more to you and less to the charity.</p>",
         chocies: [32]
     };
 
@@ -211,7 +223,7 @@
 
     var err_acc = {
         type: "html-keyboard-response",
-        stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the <b>more selfish</b> side. In " +
+        stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the side where you earn more, relative to the charity. In " +
             "other words, choose the side that gives you a higher reward and the charity a smaller reward.</p>" +
             "<p>Press the space bar to continue.</p>",
         choices: [32]
@@ -219,7 +231,7 @@
 
     var err_acc_last = {
         type: 'html-keyboard response',
-        stimulus: "<p>You failed to choose the more selfish side. Remember, the percentage of the total money " +
+        stimulus: "<p>You failed to choose the correct side. Remember, the percentage of the total money " +
             "that you keep is represented by the upper bar graph in blue, and the percentage that is given to " +
             "charity is represented by the lower bar graph in red.</p>" +
             "<p>Press the space bar to continue.</p>",
@@ -381,28 +393,28 @@
 
     var realLow =
         "<p>The following round will be a <strong>REAL</strong> decision, " +
-        "which means that the allocation you choose could be used at the " +
+        "which means that the division you choose could be used at the " +
         "end of the experiment to determine your reward and the donation to charity.</p>" +
         "<p>The total amount of money for this round is <strong>$1.60</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
     var realHigh =
         "<p>The following round will be a <strong>REAL</strong> decision, " +
-        "which means that the allocation you choose could be used at the " +
+        "which means that the division you choose could be used at the " +
         "end of the experiment to determine your reward and the donation to charity.</p>" +
         "<p>The total amount of money for this round is <strong>$32.00</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
     var hypLow =
         "<p>The following round will be a <strong>HYPOTHETICAL</strong> decision, " +
-        "which means that the allocation you choose will <strong>NOT</strong> be used at the " +
+        "which means that the division you choose will <strong>NOT</strong> be used at the " +
         "end of the experiment to determine your reward or the donation to charity.</p>" +
         "<p>The total amount of money for this round is <strong>$1.60</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
     var hypHigh =
         "<p>The following round will be a <strong>HYPOTHETICAL</strong> decision, " +
-        "which means that the allocation you choose will <strong>NOT</strong> be used at the " +
+        "which means that the division you choose will <strong>NOT</strong> be used at the " +
         "end of the experiment to determine your reward or the donation to charity.</p>" +
         "<p>The total amount of money for this round is <strong>$32.00</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";

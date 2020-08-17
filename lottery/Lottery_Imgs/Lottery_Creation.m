@@ -66,7 +66,7 @@ try
     greencol = [0 120 0]; %[0 90 0]; %[0 119 0];
     bluecol = [0 0 255];
     yellowcol = [165 165 0]; %[157 47 0]; %[200 69 0];
-    purpcol = [157 0 129]; %[238 0 100]; %[238 0 238];
+    purpcol = [135 0 130]; %[238 0 100]; %[238 0 238];
     slatecol = [50 50 169];
     aquacol = [0 204 255];
     cyancol = [0 142 142];
@@ -76,7 +76,7 @@ try
     greycol = 150;
 ListenChar(2); %suppress keyboard output
 screenCap = 1;
-doLottery = 0;
+doLottery = 1;
 doSure = 1;
 
 %% Open Screen
@@ -198,10 +198,10 @@ for i = 1:10
         disX2 = (3/4)*rad*cosd((arcsize2/2)-90+arcsize1);
     end
     if i ~= 10
-        DrawFormattedText(onScreen, ['$' amount1], cx + disX1, cy+disY1, whitecolor, [], [], [], 1.5); 
-        DrawFormattedText(onScreen, ['$' amount2], cx + disX2, cy + disY2, whitecolor, [], [], [], 1.5);
+        DrawFormattedText(onScreen, amount1, cx + disX1, cy+disY1, whitecolor, [], [], [], 1.5); 
+        DrawFormattedText(onScreen, amount2, cx + disX2, cy + disY2, whitecolor, [], [], [], 1.5);
     else
-        DrawFormattedText(onScreen, ['$' amount1], cx-25, cy, whitecolor, [], [], [], 1.5); 
+        DrawFormattedText(onScreen, amount1, cx-25, cy, whitecolor, [], [], [], 1.5); 
 
     end
 %   % Draw First Pie Chart
@@ -279,9 +279,9 @@ if doSure == 1
         Screen('Flip', onScreen); 
     % Draw Pie Chart for Sure Thing
         cond3 = 'Sure';
-        Screen('FillArc',onScreen, cyancol, centerPie, 0, 360);
-        DrawFormattedText(onScreen, ['$' sureThing], cx-70, cy, whitecolor, [], [], [], 1.5); 
-        % Show it
+        Screen('FillArc',onScreen, purpcol, centerPie, 0, 360);
+        DrawFormattedText(onScreen, [sureThing], cx-70, cy, whitecolor, [], [], [], 1.5); 
+        % Show it 
     Screen('Flip', onScreen);
   % Take a pretty picture
     if screenCap == 1
@@ -318,8 +318,8 @@ if doSure == 1
         cond3 = 'Gam';
         Screen('FillArc',onScreen, cyancol, centerPie, 0, 180);
         Screen('FillArc',onScreen, redcol, centerPie, 180, 180);
-        DrawFormattedText(onScreen, ['$' gam1], cx-275, cy, whitecolor, [], [], [], 1.5); 
-        DrawFormattedText(onScreen, ['$' gam2], cx+125, cy, whitecolor, [], [], [], 1.5); 
+        DrawFormattedText(onScreen, [gam1], cx-275, cy, whitecolor, [], [], [], 1.5); 
+        DrawFormattedText(onScreen, [gam2], cx+125, cy, whitecolor, [], [], [], 1.5); 
         % Show it
     Screen('Flip', onScreen);
   % Take a pretty picture
