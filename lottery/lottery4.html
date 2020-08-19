@@ -81,30 +81,45 @@
         };
         lowB_lottery_imgs.push('Lottery_Imgs/LowB' + i * 10 + 'percent.jpg');
     }
-
-    var low_lott_pairs = [
-        [lowA_lottery_imgs[0], lowB_lottery_imgs[0]],
-        [lowA_lottery_imgs[1], lowB_lottery_imgs[1]],
-        [lowA_lottery_imgs[2], lowB_lottery_imgs[2]],
-        [lowA_lottery_imgs[3], lowB_lottery_imgs[3]],
-        [lowA_lottery_imgs[4], lowB_lottery_imgs[4]],
-        [lowA_lottery_imgs[5], lowB_lottery_imgs[5]],
-        [lowA_lottery_imgs[6], lowB_lottery_imgs[6]]
-    ]
     /*
+        var low_lott_pairs = [
+            [lowA_lottery_imgs[0], lowB_lottery_imgs[0]],
+            [lowA_lottery_imgs[1], lowB_lottery_imgs[1]],
+            [lowA_lottery_imgs[2], lowB_lottery_imgs[2]],
+            [lowA_lottery_imgs[3], lowB_lottery_imgs[3]],
+            [lowA_lottery_imgs[4], lowB_lottery_imgs[4]],
+            [lowA_lottery_imgs[5], lowB_lottery_imgs[5]],
+            [lowA_lottery_imgs[6], lowB_lottery_imgs[6]]
+        ]
+        */
     var low_lott_pairs = [];
     for (j = 0; j < lowA_lottery_imgs.length - 1; j++) {
         var a = lowA_lottery_imgs;
         var b = lowB_lottery_imgs;
         var c = low_lott_pairs;
-        c.push([
-            {stim: a[j],
-                lab : "A"},
-            {stim: b[j],
-            lab: "B"}
-        ])
+        if (Math.random() < 0.5) {
+            c.push([
+                {
+                    stim: a[j],
+                    lab: "A"
+                },
+                {
+                    stim: b[j],
+                    lab: "B"
+                }])
+        } else {
+            c.push([
+                {
+                    stim: b[j],
+                    lab: "B"
+                },
+                {
+                    stim: a[j],
+                    lab: "A"
+                }])
+        }
     };
-    */
+
     var highA_lottery_imgs = [];
     for (var i = 1; i <= 10; i++) {
         if (i === 1 || i == 9 || i == 10) {
@@ -119,65 +134,143 @@
         };
         highB_lottery_imgs.push('Lottery_Imgs/HighB' + i * 10 + 'percent.jpg');
     }
-
-    var high_lott_pairs = [
-        [highA_lottery_imgs[0], highB_lottery_imgs[0]],
-        [highA_lottery_imgs[1], highB_lottery_imgs[1]],
-        [highA_lottery_imgs[2], highB_lottery_imgs[2]],
-        [highA_lottery_imgs[3], highB_lottery_imgs[3]],
-        [highA_lottery_imgs[4], highB_lottery_imgs[4]],
-        [highA_lottery_imgs[5], highB_lottery_imgs[5]],
-        [highA_lottery_imgs[6], highB_lottery_imgs[6]]
-    ]
-    var lowEV_pairs = [["Lottery_Imgs/1.60lowGam.jpg", "Lottery_Imgs/1.60lowSure.jpg"],
-    ["Lottery_Imgs/2.00lowGam.jpg", "Lottery_Imgs/2.00lowSure.jpg"]];
-    var highEV_pairs = [["Lottery_Imgs/1.60highGam.jpg", "Lottery_Imgs/1.60highSure.jpg"],
-    ["Lottery_Imgs/2.00highGam.jpg", "Lottery_Imgs/2.00highSure.jpg"]];
-
     /*
+        var high_lott_pairs = [
+            [highA_lottery_imgs[0], highB_lottery_imgs[0]],
+            [highA_lottery_imgs[1], highB_lottery_imgs[1]],
+            [highA_lottery_imgs[2], highB_lottery_imgs[2]],
+            [highA_lottery_imgs[3], highB_lottery_imgs[3]],
+            [highA_lottery_imgs[4], highB_lottery_imgs[4]],
+            [highA_lottery_imgs[5], highB_lottery_imgs[5]],
+            [highA_lottery_imgs[6], highB_lottery_imgs[6]]
+        ]
+        var lowEV_pairs = [["Lottery_Imgs/1.60lowGam.jpg", "Lottery_Imgs/1.60lowSure.jpg"],
+        ["Lottery_Imgs/2.00lowGam.jpg", "Lottery_Imgs/2.00lowSure.jpg"]];
+        var highEV_pairs = [["Lottery_Imgs/1.60highGam.jpg", "Lottery_Imgs/1.60highSure.jpg"],
+        ["Lottery_Imgs/2.00highGam.jpg", "Lottery_Imgs/2.00highSure.jpg"]];
+    */
+
     var high_lott_pairs = [];
     for (j = 0; j < highA_lottery_imgs.length - 1; j++) {
         var a = highA_lottery_imgs;
         var b = highB_lottery_imgs;
         var c = high_lott_pairs;
-        c.push({
-            stim1: a[j],
-            stim2: b[j],
-            mag: "high",
-            twoLott: true,
-            perc: 20 + (j * 10) // % chance of getting the higher value
-        })
+        if (Math.random() < 0.5) {
+            c.push([
+                {
+                    stim: a[j],
+                    lab: "A"
+                },
+                {
+                    stim: b[j],
+                    lab: "B"
+                }])
+        } else {
+            c.push([
+                {
+                    stim: b[j],
+                    lab: "B"
+                },
+                {
+                    stim: a[j],
+                    lab: "A"
+                }])
+        }
     };
     var lowEV_pairs = [];
-    lowEV_pairs.push({
-        stim1: "Lottery_Imgs/1.60lowGam.jpg",
-        stim2: "Lottery_Imgs/1.60lowSure.jpg",
-        mag: "high",
-        twoLott: false,
-        baseVal: 1.6
-    });
-    lowEV_pairs.push({
-        stim1: "Lottery_Imgs/2.00lowGam.jpg",
-        stim2: "Lottery_Imgs/2.00lowSure.jpg",
-        mag: "high",
-        twoLott: false,
-        baseVal: 2
-    })
+    if (Math.random() < 0.5) {
+        lowEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/1.60lowGam.jpg",
+                lab: "gamble"
+            },
+            {
+                stim: "Lottery_Imgs/1.60lowSure.jpg",
+                lab: "sure"
+            }
+        ])
+    } else {
+        lowEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/1.60lowSure.jpg",
+                lab: "sure"
+            },
+            {
+                stim: "Lottery_Imgs/1.60lowGam.jpg",
+                lab: "gamble"
+            }
+        ])
+    };
+    if (Math.random() < 0.5) {
+        lowEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/2.00lowGam.jpg",
+                lab: "gamble"
+            },
+            {
+                stim: "Lottery_Imgs/2.00lowSure.jpg",
+                lab: "sure"
+            }
+        ])
+    } else {
+        lowEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/2.00lowSure.jpg",
+                lab: "sure"
+            },
+            {
+                stim: "Lottery_Imgs/2.00lowGam.jpg",
+                lab: "gamble"
+            }
+        ])
+    };
     var highEV_pairs = [];
-    highEV_pairs.push({
-        stim1: "Lottery_Imgs/1.60highGam.jpg",
-        stim2: "Lottery_Imgs/1.60highSure.jpg",
-        mag: "high",
-        twoLott: false,
-        baseVal: 1.6
-    })
-    highEV_pairs.push({
-        stim1: "Lottery_Imgs/2.00highGam.jpg",
-        stim2: "Lottery_Imgs/2.00highSure.jpg",
-        mag: "high",
-        twoLott: false,
-        baseVal: 2
-    }) */
+    if (Math.random() < 0.5) {
+        highEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/1.60highGam.jpg",
+                lab: "gamble"
+            },
+            {
+                stim: "Lottery_Imgs/1.60highSure.jpg",
+                lab: "sure"
+            }
+        ])
+    } else {
+        highEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/1.60highSure.jpg",
+                lab: "sure"
+            },
+            {
+                stim: "Lottery_Imgs/1.60highGam.jpg",
+                lab: "gamble"
+            }
+        ])
+    };
+    if (Math.random() < 0.5) {
+        highEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/2.00highGam.jpg",
+                lab: "gamble"
+            },
+            {
+                stim: "Lottery_Imgs/2.00highSure.jpg",
+                lab: "sure"
+            }
+        ])
+    } else {
+        highEV_pairs.push([
+            {
+                stim: "Lottery_Imgs/2.00highSure.jpg",
+                lab: "sure"
+            },
+            {
+                stim: "Lottery_Imgs/2.00highGam.jpg",
+                lab: "gamble"
+            }
+        ])
+    };
 
 
     //INSTRUCTIONS AND PRACTICE SCREENS
@@ -192,7 +285,7 @@
         post_trial_gap: 2000,
         choices: [32]
     };
-   // timeline.push(instructions0);
+    // timeline.push(instructions0);
 
     var instructions1 = {
         type: "html-keyboard-response",
@@ -218,7 +311,7 @@
         post_trial_gap: 2000,
         choices: [32]
     };
-  //  timeline.push(instructions2);
+    //  timeline.push(instructions2);
 
 
     var instructions3 = {
@@ -232,7 +325,7 @@
             "<p>Press the spacebar to continue.</p>",
         choices: [32]
     };
-  //  timeline.push(instructions3);
+    //  timeline.push(instructions3);
 
 
     var example = {
@@ -254,7 +347,7 @@
             }
         ]
     };
- //   timeline.push(example);
+    //   timeline.push(example);
 
     var instructions4 = {
         type: "html-keyboard-response",
@@ -348,7 +441,7 @@
             }
         }
     };
-  //  timeline.push(conditional_fast);
+    //  timeline.push(conditional_fast);
 
     var conditional_slow = {
         timeline: [err_slow, fixation, practice2],
@@ -363,7 +456,7 @@
             }
         }
     };
-  //  timeline.push(conditional_slow);
+    //  timeline.push(conditional_slow);
 
     var conditional_incorrect = {
         timeline: [err_acc, fixation, practice2],
@@ -378,7 +471,7 @@
             }
         }
     };
-   // timeline.push(conditional_incorrect);
+    // timeline.push(conditional_incorrect);
 
     var conditional2_slow = {
         timeline: [err_slow, fixation, practice3],
@@ -393,7 +486,7 @@
             }
         }
     };
-  //  timeline.push(conditional2_slow);
+    //  timeline.push(conditional2_slow);
 
     var conditional2_fast = {
         timeline: [err_fast, fixation, practice3],
@@ -408,7 +501,7 @@
             }
         }
     };
-  //  timeline.push(conditional2_fast);
+    //  timeline.push(conditional2_fast);
 
     var conditional2_incorrect = {
         timeline: [err_acc, fixation, practice3],
@@ -423,7 +516,7 @@
             }
         }
     };
-//    timeline.push(conditional2_incorrect);
+    //    timeline.push(conditional2_incorrect);
 
     var conditional3_slow = {
         timeline: [err_slow_last],
@@ -438,7 +531,7 @@
             }
         }
     };
- //   timeline.push(conditional3_slow);
+    //   timeline.push(conditional3_slow);
 
 
 
@@ -455,7 +548,7 @@
             }
         }
     };
-  //  timeline.push(conditional3_fast);
+    //  timeline.push(conditional3_fast);
 
     var conditional3_incorrect = {
         timeline: [err_acc_last],
@@ -468,7 +561,7 @@
             }
         }
     };
-  //  timeline.push(conditional3_incorrect);
+    //  timeline.push(conditional3_incorrect);
 
 
     var practiceEnd = {
@@ -478,7 +571,7 @@
             <p>Press the space bar to begin the task.</p>`,
         choices: ['space']
     };
- //   timeline.push(practiceEnd);
+    //   timeline.push(practiceEnd);
 
 
     // REAL / HYPOTHETICAL INSTRUCTIONS
@@ -519,18 +612,20 @@
                     data.twoLott = jsPsych.timelineVariable('twoLott', true);
                     data.isReal = jsPsych.timelineVariable('isReal', true);
                     data.perc = jsPsych.timelineVariable('perc', true);
+                    data.base = jsPsych.timelineVariable('base', true);
+                    data.leftLab = jsPsych.timelineVariable('leftLab', true);
                 }
             }
         ],
         timeline_variables: [
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2), mag: "low", twoLott: true, isReal: true, perc: 60 },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2), mag: "high", twoLott: true, isReal: true, perc: 60 },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2), mag: "low", twoLott: false, isReal: true, perc: NaN },
-            { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2), mag: "high", twoLott: false, isReal: true, perc: NaN },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2), mag: "low", twoLott: true, isReal: false, perc: 70 },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2), mag: "high", twoLott: true, isReal: false, perc: 70 },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2), mag: "low", twoLott: false, isReal: false, perc: NaN },
-            { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2), mag: "high", twoLott: false, isReal: false, perc: NaN }
+            { instruc: realInstruc, choice: [low_lott_pairs[4][0].stim, low_lott_pairs[4][1].stim], leftLab: low_lott_pairs[4][0].lab, mag: "low", twoLott: true, isReal: true, perc: 60, base: NaN },
+            { instruc: realInstruc, choice: [high_lott_pairs[4][0].stim, high_lott_pairs[4][1].stim], leftLab: high_lott_pairs[4][0].lab, mag: "high", twoLott: true, isReal: true, perc: 60, base: NaN },
+            { instruc: realInstruc, choice: [lowEV_pairs[0][0].stim, lowEV_pairs[0][1].stim], leftLab: lowEV_pairs[0][0].lab, mag: "low", twoLott: false, isReal: true, perc: NaN, base: 1.6 },
+            { instruc: realInstruc, choice: [highEV_pairs[0][0].stim, highEV_pairs[0][1].stim], leftLab: highEV_pairs[0][0].lab, mag: "high", twoLott: false, isReal: true, perc: NaN, base: 1.6 },
+            { instruc: hypInstruc, choice: [low_lott_pairs[5][0].stim, low_lott_pairs[5][1].stim], leftLab: low_lott_pairs[5][0].lab, mag: "low", twoLott: true, isReal: false, perc: 70, base: NaN },
+            { instruc: hypInstruc, choice: [high_lott_pairs[5][0].stim, high_lott_pairs[5][1].stim], leftLab: high_lott_pairs[5][0].lab, mag: "high", twoLott: true, isReal: false, perc: 70, base: NaN },
+            { instruc: hypInstruc, choice: [lowEV_pairs[1][0].stim, lowEV_pairs[1][1].stim], leftLab: lowEV_pairs[1][0].lab, mag: "low", twoLott: false, isReal: false, perc: NaN, base: 2 },
+            { instruc: hypInstruc, choice: [highEV_pairs[1][0].stim, highEV_pairs[1][1].stim], leftLab: highEV_pairs[1][0].lab, mag: "high", twoLott: false, isReal: false, perc: NaN, base: 2 }
         ],
         randomize_order: true,
         conditional_function: function () {
@@ -594,8 +689,10 @@
             rewardData = jsPsych.data.get().filter({ trial_type: 'binary-choice-shifted', isReal: true }).values();
             window.rewardObj = jsPsych.randomization.sampleWithoutReplacement(rewardData, 1)[0];
             if (rewardObj.key_press === 70) {
+                window.choseLeft = true;
                 window.rewardStim = rewardObj.stimulus[0];
             } else {
+                window.choseLeft = false;
                 window.rewardStim = rewardObj.stimulus[1];
             };
         },
@@ -603,21 +700,195 @@
             document.getElementById('img').src = rewardStim;
         },
         stimulus: "<p>The following gamble or division that you chose during the experiment was chosen randomly to determine your reward:</p>" +
-                "<div style = 'float: center;'>" +
-                "<img id = 'img' style = 'width: 350px; height: 350px;'></img></div>" +
-                "<p>Press the spacebar to see the payoffs from this choice.</p>",
+            "<div style = 'float: center;'>" +
+            "<img id = 'img' style = 'width: 350px; height: 350px;'></img></div>" +
+            "<p>Press the spacebar to see the payoffs from this choice.</p>",
         choices: [32]
     };
     timeline.push(rewardScreen);
 
-    var pointsScreen = {
+    var gamRewardScreen = {
         type: "html-keyboard-response",
         on_start: function (data) {
-            
+            if (rewardObj.twoLott == true) {
+                if (rewardObj.mag == "high") {
+                    if (choseLeft == true) {
+                        if (rewardObj.leftLab == "A") { //High A X%
+                            perc = rewardObj.perc;
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 32;
+                            } else {
+                                window.rewardVal = 40;
+                            }
+                        } else { //High B X%
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 2;
+                            } else {
+                                window.rewardVal = 77;
+                            }
+                        }
+                    } else { //This means they chose right option => switch outcomes from above
+                        if (rewardObj.leftLab == "B") { //High A X% again 
+                            perc = rewardObj.perc;
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 32;
+                            } else {
+                                window.rewardVal = 40;
+                            }
+                        } else { //High B X% again
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 2;
+                            } else {
+                                window.rewardVal = 77;
+                            }
+                        }
+                    }
+                } else { //This means mag == "low"
+                    if (choseLeft == true) {
+                        if (rewardObj.leftLab == "A") { //Low A X%
+                            perc = rewardObj.perc;
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 1.60;
+                            } else {
+                                window.rewardVal = 2;
+                            }
+                        } else { //Low B X%
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 0.10;
+                            } else {
+                                window.rewardVal = 3.85;
+                            }
+                        }
+                    } else { //This means they chose right option => switch outcomes from above
+                        if (rewardObj.leftLab == "B") { //Low A X% again 
+                            perc = rewardObj.perc;
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 1.60;
+                            } else {
+                                window.rewardVal = 2;
+                            }
+                        } else { //Low B X% again
+                            if (Math.floor(Math.random() * 100) < perc) {
+                                window.rewardVal = 0.10;
+                            } else {
+                                window.rewardVal = 3.85;
+                            }
+                        }
+                    }
+                }
+            } else { //This means (twoLott == false) => this is an EV gamble
+                if (rewardObj.mag == "high") {
+                    if (rewardObj.base == 1.6) {
+                        if (choseLeft == true) {
+                            if (rewardObj.leftLab == "gamble") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 32;
+                                }
+                            } else { //This means leftLab is sure thing and they chose left
+                                window.rewardVal = 9.51;
+                            }
+                        } else { //This means choseLeft == false => switch outcomes
+                            if (rewardObj.leftLab == "sure") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 32;
+                                }
+                            } else { //This means leftLab is sure thing and they chose right
+                                window.rewardVal = 9.51;
+                            }
+                        }
+                    } else { //This means base == 2
+                        if (choseLeft == true) {
+                            if (rewardObj.leftLab == "gamble") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 40;
+                                }
+                            } else { //This means leftLab is sure thing and they chose left
+                                window.rewardVal = 11.50;
+                            }
+                        } else { //This means choseLeft == false => switch outcomes
+                            if (rewardObj.leftLab == "sure") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 40;
+                                }
+                            } else { //This means leftLab is sure thing and they chose right
+                                window.rewardVal = 11.50;
+                            }
+                        }
+                    }
+                } else { //This means (mag == "low")
+                    if (rewardObj.base == 1.6) {
+                        if (choseLeft == true) {
+                            if (rewardObj.leftLab == "gamble") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 1.60;
+                                }
+                            } else { //This means leftLab is sure thing and they chose left
+                                window.rewardVal = 0.75;
+                            }
+                        } else { //This means choseLeft == false => switch outcomes
+                            if (rewardObj.leftLab == "sure") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 1.60;
+                                }
+                            } else { //This means leftLab is sure thing and they chose right
+                                window.rewardVal = 0.75;
+                            }
+                        }
+                    } else { //This means base == 2
+                        if (choseLeft == true) {
+                            if (rewardObj.leftLab == "gamble") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 2;
+                                }
+                            } else { //This means leftLab is sure thing and they chose left
+                                window.rewardVal = 0.90;
+                            }
+                        } else { //This means choseLeft == false => switch outcomes
+                            if (rewardObj.leftLab == "sure") {
+                                if (Math.floor(Math.random()) < 50) {
+                                    window.rewardVal = 0;
+                                } else {
+                                    window.rewardVal = 2;
+                                }
+                            } else { //This means leftLab is sure thing and they chose right
+                                window.rewardVal = 0.90;
+                            }
+                        }
+                    }
+                }
+            }
         },
-        choices: [32]
+        stimulus: "<p>You earned the following amount of points from playing the gamble shown on the previous screen:</p>" +
+            "<div id = 'reward' style = 'float: center;'></div>" +
+            "<p>Press the spacebar to continue.</p>",
+        choices: [32],
+        on_load: function dispReward() {
+            rewardValString = rewardVal.toString();
+            document.getElementById('reward').textContent += rewardValString;
+        },
+        conditional_function: function () {
+            if (rewardObj.type == "gamble") {
+                return true;
+            } else {
+                return false;
+            }
+        }
     };
-    timeline.push(pointsScreen);
+    timeline.push(gamRewardScreen);
 
 
     var end = {
