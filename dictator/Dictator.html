@@ -62,6 +62,103 @@
     var dir = 'Dic_Imgs/';
     var dictator_stim = [dir + '65_35.jpg', dir + '70_30.jpg', dir + '75_25.jpg', dir + '80_20.jpg', dir + '85_15.jpg', dir + '90_10.jpg', dir + '95_5.jpg'];
 
+    // Dictator pairs (should be able to easily change)
+    var dic_pairs = [];
+    if (Math.random < 0.5) { //Pair 1
+        dic_pairs.push([
+            {
+                stim: dictator_stim[0],
+                lab: 65
+            },
+            {
+                stim: dictator_stim[5],
+                lab: 90
+            }
+        ])
+    } else {
+        dic_pairs.push([
+            {
+                stim: dictator_stim[5],
+                lab: 90
+            },
+            {
+                stim: dictator_stim[0],
+                lab: 65
+            }
+        ])
+    }
+
+    if (Math.random < 0.5) { //Pair 2
+        dic_pairs.push([
+            {
+                stim: dictator_stim[3],
+                lab: 65
+            },
+            {
+                stim: dictator_stim[6],
+                lab: 90
+            }
+        ])
+    } else {
+        dic_pairs.push([
+            {
+                stim: dictator_stim[6],
+                lab: 90
+            },
+            {
+                stim: dictator_stim[3],
+                lab: 65
+            }
+        ])
+    }
+
+    if (Math.random < 0.5) { // Pair 3
+        dic_pairs.push([
+            {
+                stim: dictator_stim[2],
+                lab: 65
+            },
+            {
+                stim: dictator_stim[4],
+                lab: 90
+            }
+        ])
+    } else {
+        dic_pairs.push([
+            {
+                stim: dictator_stim[4],
+                lab: 90
+            },
+            {
+                stim: dictator_stim[2],
+                lab: 65
+            }
+        ])
+    }
+
+    if (Math.random < 0.5) { // Pair 4
+        dic_pairs.push([
+            {
+                stim: dictator_stim[0],
+                lab: 65
+            },
+            {
+                stim: dictator_stim[1],
+                lab: 90
+            }
+        ])
+    } else {
+        dic_pairs.push([
+            {
+                stim: dictator_stim[1],
+                lab: 90
+            },
+            {
+                stim: dictator_stim[0],
+                lab: 65
+            }
+        ])
+    }
 
     // Load charity images
     var dir2 = 'Charity_Imgs/';
@@ -69,9 +166,9 @@
     dir2 + 'Library Foundation of Los Angeles.JPG', dir2 + 'National Pediatric Cancer Foundation.JPG', dir2 + "National Transplant Assistance Fund", dir2 + "Orphan Outreach.JPG",
     dir2 + "Parkinsons Disease Foundation.JPG", dir2 + 'Orangutan Foundation International.JPG'];
 
-    //INSTRUCTIONS AND PRACTICE SCREENS
+    // DICTATOR INSTRUCTIONS AND PRACTICE SCREENS
 
-    var instructions0 = {
+    var dicInstructions0 = {
         type: "html-keyboard-response",
         stimulus: "<p>This experiment will involve monetary decisions using a point system. Any outcomes " +
             "of the experiment will be in points, which will then be converted to USD ($) once the experiment " +
@@ -81,9 +178,9 @@
         post_trial_gap: 2000,
         choices: [32]
     };
-    timeline.push(instructions0);
+    //timeline.push(dicInstructions0);
 
-    var instructions1 = {
+    var dicInstructions1 = {
         type: "html-keyboard-response",
         stimulus: "<p>In this experiment, you will be making decisions about how " +
             "many points you would like to donate to a charity of your choice. At the start of " +
@@ -93,9 +190,9 @@
         post_trial_gap: 2000,
         choices: [32]
     };
-    timeline.push(instructions1);
+    //timeline.push(dicInstructions1);
 
-    var instructions2 = {
+    var dicInstructions2 = {
         type: "html-keyboard-response",
         stimulus: "<p>One division will be shown on the left side of the screen, and the other will " +
             "be shown on the right. The percentage of the total amount of points that you " +
@@ -108,9 +205,9 @@
         post_trial_gap: 2000,
         choices: [32]
     };
-    timeline.push(instructions2);
+    //timeline.push(dicInstructions2);
 
-    var instructions3 = {
+    var dicInstructions3 = {
         type: "html-keyboard-response",
         stimulus: "<p>Some of the rounds are hypothetical: they will not affect the amount " +
             "of points you (or the charity) will actually receive at the end of the experiment. " +
@@ -122,10 +219,10 @@
         post_trial_gap: 2000,
         choices: [32]
     };
-    timeline.push(instructions3);
+    //timeline.push(dicInstructions3);
 
 
-    var instructions4 = {
+    var dicInstructions4 = {
         type: "html-keyboard-response",
         stimulus: "<p>You will now see an example round. First, a cross will be displayed in " +
             "the center of the screen. Then, two divisions will be shown on the screen, " +
@@ -135,10 +232,10 @@
             "<p>Press the spacebar to continue.</p>",
         choices: [32]
     };
-    timeline.push(instructions4);
+    //timeline.push(dicInstructions4);
 
 
-    var example = {
+    var dicExample = {
         timeline: [
             {
                 type: "html-keyboard-response",
@@ -158,9 +255,9 @@
             }
         ]
     };
-    timeline.push(example);
+    //timeline.push(dicExample);
 
-    var instructions5 = {
+    var dicInstructions5 = {
         type: "html-keyboard-response",
         stimulus: "<p>You will now complete a practice round to ensure that you understand " +
             "how the graphs work. In this round, we want you to choose the " +
@@ -170,28 +267,28 @@
             "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
         choices: [32]
     };
-    timeline.push(instructions5);
+    //timeline.push(dicInstructions5);
 
-    var practice1 = {
+    var dicPractice1 = {
         type: "binary-choice-shifted",
         stimulus: [dictator_stim[5], dictator_stim[0]],
         choices: ["F", "J"]
     };
-    timeline.push(fixation, practice1);
+    //timeline.push(fixation, dicPractice1);
 
-    var practice2 = {
+    var dicPractice2 = {
         type: 'binary-choice-shifted',
         stimulus: [dictator_stim[2], dictator_stim[6]],
         choices: ["F", "J"]
     };
 
-    var practice3 = {
+    var dicPractice3 = {
         type: "binary-choice-shifted",
         stimulus: [dictator_stim[1], dictator_stim[5]],
         choices: ["F", "J"]
     }
 
-    var err_slow = {
+    var dic_err_slow = {
         type: 'html-keyboard-response',
         stimulus: "<p>Whoops! You responded too slowly. Let's try that again. " +
             "Please rest your fingers on the F and J keys, and press the spacebar to " +
@@ -199,7 +296,7 @@
         choices: [32]
     };
 
-    var err_fast = {
+    var dic_err_fast = {
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. Let's try that again. " +
             "Please rest your fingers on the F and J keys, and press the spacebar to " +
@@ -207,21 +304,21 @@
         chocies: [32]
     };
 
-    var err_slow_last = {
+    var dic_err_slow_last = {
         type: "html-keyboard-response",
         stimulus: `<p>Your response was too slow. For the actual task, please try to respond more quickly.</p>
             <p>Press the space bar to continue.</p>`,
         choices: [32]
     };
 
-    var err_fast_last = {
+    var dic_err_fast_last = {
         type: "html-keyboard-response",
         stimulus: `<p>Your response was too fast. For the actual task, please try to take in the information before making a response.</p>
             <p>Press the space bar to continue.</p>`,
         choices: [32]
     };
 
-    var err_acc = {
+    var dic_err_acc = {
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the side where you earn more, relative to the charity. In " +
             "other words, choose the side that gives you a higher reward and the charity a smaller reward.</p>" +
@@ -229,8 +326,8 @@
         choices: [32]
     };
 
-    var err_acc_last = {
-        type: 'html-keyboard response',
+    var dic_err_acc_last = {
+        type: 'html-keyboard-response',
         stimulus: "<p>You failed to choose the correct side. Remember, the percentage of the total points " +
             "that you keep is represented by the upper bar graph in blue, and the percentage that is given to " +
             "charity is represented by the lower bar graph in red.</p>" +
@@ -238,8 +335,8 @@
         choices: [32]
     };
 
-    var conditional_fast = {
-        timeline: [err_fast, fixation, practice2],
+    var dic_conditional_fast = {
+        timeline: [dic_err_fast, fixation, dicPractice2],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.rt >= 500) {
@@ -251,10 +348,10 @@
             }
         }
     };
-    timeline.push(conditional_fast);
+    //timeline.push(dic_conditional_fast);
 
-    var conditional_slow = {
-        timeline: [err_slow, fixation, practice2],
+    var dic_conditional_slow = {
+        timeline: [dic_err_slow, fixation, dicPractice2],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.rt <= 5500 || fast1 == true) {
@@ -266,10 +363,10 @@
             }
         }
     };
-    timeline.push(conditional_slow);
+    //timeline.push(dic_conditional_slow);
 
-    var conditional_incorrect = {
-        timeline: [err_acc, fixation, practice2],
+    var dic_conditional_incorrect = {
+        timeline: [dic_err_acc, fixation, dicPractice2],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j') && fast1 != true && slow1 != true) {
@@ -281,10 +378,10 @@
             }
         }
     };
-    timeline.push(conditional_incorrect);
+    //timeline.push(dic_conditional_incorrect);
 
-    var conditional2_slow = {
-        timeline: [err_slow, fixation, practice3],
+    var dic_conditional2_slow = {
+        timeline: [dic_err_slow, fixation, dicPractice3],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.rt <= 5500) {
@@ -296,10 +393,10 @@
             }
         }
     };
-    timeline.push(conditional2_slow);
+    //timeline.push(dic_conditional2_slow);
 
-    var conditional2_fast = {
-        timeline: [err_fast, fixation, practice3],
+    var dic_conditional2_fast = {
+        timeline: [dic_err_fast, fixation, dicPractice3],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.rt >= 500 || slow2 == true) {
@@ -311,10 +408,10 @@
             }
         }
     };
-    timeline.push(conditional2_fast);
+    //timeline.push(dic_conditional2_fast);
 
-    var conditional2_incorrect = {
-        timeline: [err_acc, fixation, practice3],
+    var dic_conditional2_incorrect = {
+        timeline: [dic_err_acc, fixation, dicPractice3],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (acc == false && data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f') && fast2 != true && slow2 != true) {
@@ -326,10 +423,10 @@
             }
         }
     };
-    timeline.push(conditional2_incorrect);
+    //timeline.push(dic_conditional2_incorrect);
 
-    var conditional3_slow = {
-        timeline: [err_slow_last],
+    var dic_conditional3_slow = {
+        timeline: [dic_err_slow_last],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.rt <= 5500) {
@@ -341,12 +438,12 @@
             }
         }
     };
-    timeline.push(conditional3_slow);
+    //timeline.push(dic_conditional3_slow);
 
 
 
-    var conditional3_fast = {
-        timeline: [err_fast_last],
+    var dic_conditional3_fast = {
+        timeline: [dic_err_fast_last],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (data.rt >= 500 || slow3 == true) {
@@ -358,10 +455,10 @@
             }
         }
     };
-    timeline.push(conditional3_fast);
+    //timeline.push(dic_conditional3_fast);
 
-    var conditional3_incorrect = {
-        timeline: [err_acc_last],
+    var dic_conditional3_incorrect = {
+        timeline: [dic_err_acc_last],
         conditional_function: function () {
             var data = jsPsych.data.get().last(1).values()[0];
             if (acc2 == false && data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f') && fast3 != true && slow3 != true) {
@@ -371,7 +468,7 @@
             }
         }
     };
-    timeline.push(conditional3_incorrect);
+    //timeline.push(dic_conditional3_incorrect);
 
 
     var practiceEnd = {
@@ -381,38 +478,40 @@
             <p>Press the space bar to begin the task.</p>`,
         choices: ['space']
     };
-    timeline.push(practiceEnd);
+    //timeline.push(practiceEnd);
+
+
+    // DICTATOR PRACTICE TIMELINE
+    var dic_practice_timeline = {
+        timeline: [dicInstructions0, dicInstructions1, dicInstructions2, dicInstructions3, dicInstructions4, dicExample, dicInstructions5, fixation, dicPractice1,
+        dic_conditional_fast, dic_conditional_slow, dic_conditional_incorrect, dic_conditional2_slow, dic_conditional2_fast, dic_conditional2_incorrect,
+        dic_conditional3_slow, dic_conditional3_fast, dic_conditional3_incorrect, practiceEnd]
+    };
 
 
 
-
-
-    var rnum = Math.floor(7 * Math.random());
-   /* var lowPair = low_lott_pairs[rnum];
-    var highPair = high_lott_pairs[rnum]; */
-
-    var realLow =
+    var dicRealLow =
         "<p>The following round will be a <strong>REAL</strong> decision, " +
         "which means that the division you choose could be used at the " +
         "end of the experiment to determine your reward and the donation to charity.</p>" +
         "<p>The total amount of points for this round is <strong>1.6</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
-    var realHigh =
+    var dicRealHigh =
         "<p>The following round will be a <strong>REAL</strong> decision, " +
         "which means that the division you choose could be used at the " +
         "end of the experiment to determine your reward and the donation to charity.</p>" +
         "<p>The total amount of points for this round is <strong>32</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
-    var hypLow =
+    var dicHypLow =
         "<p>The following round will be a <strong>HYPOTHETICAL</strong> decision, " +
         "which means that the division you choose will <strong>NOT</strong> be used at the " +
         "end of the experiment to determine your reward or the donation to charity.</p>" +
         "<p>The total amount of points for this round is <strong>1.6</strong>.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
-    var hypHigh =
+    var dicHypHigh =
         "<p>The following round will be a <strong>HYPOTHETICAL</strong> decision, " +
         "which means that the division you choose will <strong>NOT</strong> be used at the " +
         "end of the experiment to determine your reward or the donation to charity.</p>" +
@@ -420,10 +519,10 @@
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
 
-    var counterBal = Math.random;
+    var dicCounterBal = Math.random();
 
 
-    var dictator_procedure = {
+    var dictator_procedure1 = {
         timeline: [
             {
                 type: "html-keyboard-response",
@@ -434,55 +533,158 @@
             {
                 type: "binary-choice-shifted",
                 stimulus: jsPsych.timelineVariable('choice'),
-                choices: ["F", "J"]
+                choices: ["F", "J"],
+                on_finish: (data) => {
+                    data.type = "allocation";
+                    data.mag = jsPsych.timelineVariable('mag', true);
+                    data.twoLott = NaN;
+                    data.isReal = jsPsych.timelineVariable('isReal', true);
+                    data.perc = NaN;
+                    data.base = NaN;
+                    data.leftLab = jsPsych.timelineVariable('leftLab', true);
+                    data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                }
             }
         ],
         timeline_variables: [
-            { instruc: realLow, choice: jsPsych.randomization.sampleWithoutReplacement(dictator_stim, 2) },
-            { instruc: realHigh, choice: jsPsych.randomization.sampleWithoutReplacement(dictator_stim, 2) },
-            { instruc: hypLow, choice: jsPsych.randomization.sampleWithoutReplacement(dictator_stim, 2) },
-            { instruc: hypHigh, choice: jsPsych.randomization.sampleWithoutReplacement(dictator_stim, 2) },
+            { instruc: dicRealLow, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "low", isReal: true},
+            { instruc: dicRealHigh, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "high", isReal: true},
+            { instruc: dicHypLow, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "low", isReal: false},
+            { instruc: dicHypHigh, choice:  [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "high", isReal: false},
         ],
         randomize_order: true,
+        conditional_function: function () {
+            if(dicCounterBal < 0.25){
+                return true;
+            }else{
+                return false;
+            }
+        }
     };
-    timeline.push(dictator_procedure);
+    timeline.push(dictator_procedure1);
 
-    /*
-        var lottery_procedure2 = {
-            timeline: [
-                {
-                    type: "html-keyboard-response",
-                    stimulus: jsPsych.timelineVariable('instruc'),
-                    choices: [32]
-                },
-                fixation,
-                {
-                    type: "binary-choice-shifted",
-                    stimulus: jsPsych.timelineVariable('choice'),
-                    choices: ["F", "J"]
-                }
-            ],
-            timeline_variables: [
-                { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[4], 2) },
-                { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[4], 2) },
-                { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[0], 2) },
-                { instruc: hypInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[0], 2) },
-                { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(low_lott_pairs[5], 2) },
-                { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(high_lott_pairs[5], 2) },
-                { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(lowEV_pairs[1], 2) },
-                { instruc: realInstruc, choice: jsPsych.randomization.sampleWithoutReplacement(highEV_pairs[1], 2) }
-            ],
-            randomize_order: true,
-            conditional_function: function () {
-                if (counterBal < 0.5) {
-                    return false;
-                } else {
-                    return true;
+    var dictator_procedure2 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"],
+                on_finish: (data) => {
+                    data.type = "allocation";
+                    data.mag = jsPsych.timelineVariable('mag', true);
+                    data.twoLott = NaN;
+                    data.isReal = jsPsych.timelineVariable('isReal', true);
+                    data.perc = NaN;
+                    data.base = NaN;
+                    data.leftLab = jsPsych.timelineVariable('leftLab', true);
+                    data.rightLab = jsPsych.timelineVariable('rightLab', true);
                 }
             }
-        };
-        timeline.push(lottery_procedure2);
-    */
+        ],
+        timeline_variables: [
+            { instruc: dicRealLow, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "low", isReal: true},
+            { instruc: dicRealHigh, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "high", isReal: true},
+            { instruc: dicHypLow, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "low", isReal: false},
+            { instruc: dicHypHigh, choice:  [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "high", isReal: false},
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if(dicCounterBal < 0.5 && dicCounterBal >= 0.25){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    };
+    timeline.push(dictator_procedure2);
+
+    var dictator_procedure3 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"],
+                on_finish: (data) => {
+                    data.type = "allocation";
+                    data.mag = jsPsych.timelineVariable('mag', true);
+                    data.twoLott = NaN;
+                    data.isReal = jsPsych.timelineVariable('isReal', true);
+                    data.perc = NaN;
+                    data.base = NaN;
+                    data.leftLab = jsPsych.timelineVariable('leftLab', true);
+                    data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                }
+            }
+        ],
+        timeline_variables: [
+            { instruc: dicRealLow, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "low", isReal: true},
+            { instruc: dicRealHigh, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "high", isReal: true},
+            { instruc: dicHypLow, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "low", isReal: false},
+            { instruc: dicHypHigh, choice:  [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "high", isReal: false},
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if(dicCounterBal < 0.75 && dicCounterBal >= 0.5){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    };
+    timeline.push(dictator_procedure3);
+
+    var dictator_procedure4 = {
+        timeline: [
+            {
+                type: "html-keyboard-response",
+                stimulus: jsPsych.timelineVariable('instruc'),
+                choices: [32]
+            },
+            fixation,
+            {
+                type: "binary-choice-shifted",
+                stimulus: jsPsych.timelineVariable('choice'),
+                choices: ["F", "J"],
+                on_finish: (data) => {
+                    data.type = "allocation";
+                    data.mag = jsPsych.timelineVariable('mag', true);
+                    data.twoLott = NaN;
+                    data.isReal = jsPsych.timelineVariable('isReal', true);
+                    data.perc = NaN;
+                    data.base = NaN;
+                    data.leftLab = jsPsych.timelineVariable('leftLab', true);
+                    data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                }
+            }
+        ],
+        timeline_variables: [
+            { instruc: dicRealLow, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "low", isReal: true},
+            { instruc: dicRealHigh, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "high", isReal: true},
+            { instruc: dicHypLow, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "low", isReal: false},
+            { instruc: dicHypHigh, choice:  [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "high", isReal: false},
+        ],
+        randomize_order: true,
+        conditional_function: function () {
+            if(dicCounterBal >= 0.75){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    };
+    timeline.push(dictator_procedure4);
 
     var end = {
         type: "html-keyboard-response",
