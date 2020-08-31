@@ -27,6 +27,9 @@
 <body>
 </body>
 <script>
+
+    //TESTING ?
+    var testing = true;
     // CREATE TIMELINE
     var timeline = [];
 
@@ -446,7 +449,7 @@
             fixation,
             {
                 type: "binary-choice-shifted",
-                stimulus: high_lott_pairs[1],
+                stimulus: [high_lott_pairs[1][0].stim, high_lott_pairs[1][1].stim],
                 choices: ["F", "J"]
             }
         ]
@@ -463,24 +466,24 @@
             "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
         choices: [32]
     };
-    timeline.push(lotInstructions4);
+    //timeline.push(lotInstructions4);
 
     var lotPractice1 = {
         type: "binary-choice-shifted",
-        stimulus: low_lott_pairs[0],
+        stimulus: [low_lott_pairs[0][0].stim, low_lott_pairs[0][1].stim],
         choices: ["F", "J"]
     };
     //timeline.push(fixation, lotPractice1);
 
     var lotPractice2 = {
         type: 'binary-choice-shifted',
-        stimulus: high_lott_pairs[0],
+        stimulus: [high_lott_pairs[0][0].stim, high_lott_pairs[0][1].stim],
         choices: ["F", "J"]
     };
 
     var lotPractice3 = {
         type: "binary-choice-shifted",
-        stimulus: low_lott_pairs[1],
+        stimulus: [low_lott_pairs[1][0].stim, low_lott_pairs[1][1].stim],
         choices: ["F", "J"]
     }
 
@@ -677,9 +680,9 @@
     };
     //   timeline.push(practiceEnd);
 
-        // DICTATOR INSTRUCTIONS AND PRACTICE SCREENS
+    // DICTATOR INSTRUCTIONS AND PRACTICE SCREENS
 
-        var dicInstructions0 = {
+    var dicInstructions0 = {
         type: "html-keyboard-response",
         stimulus: "<p>This experiment will involve monetary decisions using a point system. Any outcomes " +
             "of the experiment will be in points, which will then be converted to USD ($) once the experiment " +
@@ -984,14 +987,14 @@
     // LOTTERY PRACTICE TIMELINE
     var lot_practice_timeline = {
         timeline: [lotInstructions0, lotInstructions1, lotInstructions2, lotInstructions3, lotExample, lotInstructions4, fixation, lotPractice1, lot_cond_fast, lot_cond_slow,
-        lot_cond_incorrect, lot_cond2_slow, lot_cond2_fast, lot_cond2_incorrect, lot_cond3_slow, lot_cond3_fast, lot_cond3_incorrect, practiceEnd]
+            lot_cond_incorrect, lot_cond2_slow, lot_cond2_fast, lot_cond2_incorrect, lot_cond3_slow, lot_cond3_fast, lot_cond3_incorrect, practiceEnd]
     };
 
     // DICTATOR PRACTICE TIMELINE
     var dic_practice_timeline = {
         timeline: [dicInstructions0, dicInstructions1, dicInstructions2, dicInstructions3, dicInstructions4, dicExample, dicInstructions5, fixation, dicPractice1,
-        dic_conditional_fast, dic_conditional_slow, dic_conditional_incorrect, dic_conditional2_slow, dic_conditional2_fast, dic_conditional2_incorrect,
-        dic_conditional3_slow, dic_conditional3_fast, dic_conditional3_incorrect, practiceEnd]
+            dic_conditional_fast, dic_conditional_slow, dic_conditional_incorrect, dic_conditional2_slow, dic_conditional2_fast, dic_conditional2_incorrect,
+            dic_conditional3_slow, dic_conditional3_fast, dic_conditional3_incorrect, practiceEnd]
     };
 
     // LOTTERY REAL/HYPOTHETICAL INSTRUCTIONS
@@ -1008,7 +1011,7 @@
         "end of the experiment to determine your reward.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
-    
+
     // DICTATOR INSTRUCTIONS
 
     var dicRealLow =
@@ -1092,7 +1095,7 @@
     };
     //timeline.push(lottery_procedure1);
 
-    
+
     var lottery_procedure2 = {
         timeline: [
             {
@@ -1165,16 +1168,16 @@
             }
         ],
         timeline_variables: [
-            { instruc: dicRealLow, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "low", isReal: true},
-            { instruc: dicRealHigh, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "high", isReal: true},
-            { instruc: dicHypLow, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "low", isReal: false},
-            { instruc: dicHypHigh, choice:  [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "high", isReal: false},
+            { instruc: dicRealLow, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "low", isReal: true },
+            { instruc: dicRealHigh, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "high", isReal: true },
+            { instruc: dicHypLow, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "low", isReal: false },
+            { instruc: dicHypHigh, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "high", isReal: false },
         ],
         randomize_order: true,
         conditional_function: function () {
-            if(dicCounterBal < 0.25){
+            if (dicCounterBal < 0.25) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -1206,16 +1209,16 @@
             }
         ],
         timeline_variables: [
-            { instruc: dicRealLow, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "low", isReal: true},
-            { instruc: dicRealHigh, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "high", isReal: true},
-            { instruc: dicHypLow, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "low", isReal: false},
-            { instruc: dicHypHigh, choice:  [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "high", isReal: false},
+            { instruc: dicRealLow, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "low", isReal: true },
+            { instruc: dicRealHigh, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "high", isReal: true },
+            { instruc: dicHypLow, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "low", isReal: false },
+            { instruc: dicHypHigh, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "high", isReal: false },
         ],
         randomize_order: true,
         conditional_function: function () {
-            if(dicCounterBal < 0.5 && dicCounterBal >= 0.25){
+            if (dicCounterBal < 0.5 && dicCounterBal >= 0.25) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -1247,16 +1250,16 @@
             }
         ],
         timeline_variables: [
-            { instruc: dicRealLow, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "low", isReal: true},
-            { instruc: dicRealHigh, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "high", isReal: true},
-            { instruc: dicHypLow, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "low", isReal: false},
-            { instruc: dicHypHigh, choice:  [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "high", isReal: false},
+            { instruc: dicRealLow, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "low", isReal: true },
+            { instruc: dicRealHigh, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "high", isReal: true },
+            { instruc: dicHypLow, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "low", isReal: false },
+            { instruc: dicHypHigh, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "high", isReal: false },
         ],
         randomize_order: true,
         conditional_function: function () {
-            if(dicCounterBal < 0.75 && dicCounterBal >= 0.5){
+            if (dicCounterBal < 0.75 && dicCounterBal >= 0.5) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -1288,16 +1291,16 @@
             }
         ],
         timeline_variables: [
-            { instruc: dicRealLow, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "low", isReal: true},
-            { instruc: dicRealHigh, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "high", isReal: true},
-            { instruc: dicHypLow, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "low", isReal: false},
-            { instruc: dicHypHigh, choice:  [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "high", isReal: false},
+            { instruc: dicRealLow, choice: [dic_pairs[1][0].stim, dic_pairs[1][1].stim], leftLab: dic_pairs[1][0].lab, rightLab: dic_pairs[1][1].lab, mag: "low", isReal: true },
+            { instruc: dicRealHigh, choice: [dic_pairs[2][0].stim, dic_pairs[2][1].stim], leftLab: dic_pairs[2][0].lab, rightLab: dic_pairs[2][1].lab, mag: "high", isReal: true },
+            { instruc: dicHypLow, choice: [dic_pairs[3][0].stim, dic_pairs[3][1].stim], leftLab: dic_pairs[3][0].lab, rightLab: dic_pairs[3][1].lab, mag: "low", isReal: false },
+            { instruc: dicHypHigh, choice: [dic_pairs[0][0].stim, dic_pairs[0][1].stim], leftLab: dic_pairs[0][0].lab, rightLab: dic_pairs[0][1].lab, mag: "high", isReal: false },
         ],
         randomize_order: true,
         conditional_function: function () {
-            if(dicCounterBal >= 0.75){
+            if (dicCounterBal >= 0.75) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -1313,36 +1316,49 @@
     //LOTTERY VS. DICTATOR TIMELINE
     var lott_dic_timeline1 = {
         timeline: [lot_practice_timeline, lottery_procedure1, lottery_procedure2, endTask, dic_practice_timeline, dictator_procedure1, dictator_procedure2, dictator_procedure3,
-        dictator_procedure4],
-        conditional_function: function() {
-            if(lot_dic_CounterBal < 0.5){
+            dictator_procedure4],
+        conditional_function: function () {
+            if (lot_dic_CounterBal < 0.5) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
     };
-    timeline.push(lott_dic_timeline1);
+    //timeline.push(lott_dic_timeline1);
 
     var lott_dic_timeline2 = {
         timeline: [dic_practice_timeline, dictator_procedure1, dictator_procedure2, dictator_procedure3, dictator_procedure4, endTask, lot_practice_timeline, lottery_procedure1,
-        lottery_procedure2],
-        conditional_function: function() {
-            if(lot_dic_CounterBal >= 0.5){
+            lottery_procedure2],
+        conditional_function: function () {
+            if (lot_dic_CounterBal >= 0.5) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
     };
-    timeline.push(lott_dic_timeline2);
+    //timeline.push(lott_dic_timeline2);
+
+    //DICTATOR TESTING TIMELINE
+    var dic_test_timeline = {
+        timeline: [dictator_procedure1, dictator_procedure2, dictator_procedure3, dictator_procedure4],
+        conditional_function: function () {
+            if (testing == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    timeline.push(dic_test_timeline);
 
     // REWARDS/OUTCOMES
 
     var endAll = {
         type: "html-keyboard-response",
         on_start: function (data) {
-            rewardData = jsPsych.data.get().filter({ trial_type: 'binary-choice-shifted', isReal: true }).values();
+            rewardData = jsPsych.data.get().filter({ trial_type: 'binary-choice-shifted', isReal: true, type: "allocation" }).values();
             window.rewardObj = jsPsych.randomization.sampleWithoutReplacement(rewardData, 1)[0];
             if (rewardObj.key_press === 70) {
                 window.choseLeft = true;
@@ -1359,7 +1375,7 @@
     timeline.push(endAll);
 
 
-    var lotRewardScreen = {
+    var lotRewardScreen1 = {
         type: "html-keyboard-response",
         on_load: function dispStim() {
             document.getElementById('img').src = rewardStim;
@@ -1368,42 +1384,35 @@
             "<div style = 'float: center;'>" +
             "<img id = 'img' style = 'width: 350px; height: 350px;'></img></div>" +
             "<p>Press the spacebar to see the payoffs from this choice.</p>",
-        choices: [32],
-        conditional_function: function() {
-            if(rewardObj.type == "gamble"){
-                return true;
-            } else{
-                return false;
-            }
-        }
+        choices: [32]
     };
-    timeline.push(lotRewardScreen);
 
-    var dicRewardScreen = {
+    var dicRewardScreen1 = {
         type: "html-keyboard-response",
         on_load: function dispStim() {
             document.getElementById('img').src = rewardStim;
             totalValString = totalVal.toString();
             document.getElementById('text').textContent += totalValString;
         },
+        on_start: function () {
+            if (rewardObj.mag == "low") {
+                window.totalVal = 1.6;
+            } else {
+                if (rewardObj.mag == "high") {
+                    window.totalVal = 32;
+                }
+            }
+        },
         stimulus: "<p>The following division that you chose during the experiment was chosen randomly to determine your reward:</p>" +
             "<div id = 'text' style = 'float: center;'>" +
-            "<p>Total amount of money:</p></div>" +
+            "<p>Total amount of money:  </p></div>" +
             "<div style = 'float: center;'>" +
             "<img id = 'img' style = 'width: 350px; height: 350px;'></img></div>" +
             "<p>Press the spacebar to see the payoffs from this choice.</p>",
-        choices: [32],
-        conditional_function: function() {
-            if(rewardObj.type == "allocation"){
-                return true;
-            } else{
-                return false;
-            }
-        }
+        choices: [32]
     };
-    timeline.push(dicRewardScreen);
 
-    var lotRewardScreen = {
+    var lotRewardScreen2 = {
         type: "html-keyboard-response",
         on_start: function (data) {
             if (rewardObj.twoLott == true) {
@@ -1575,7 +1584,40 @@
         on_load: function dispReward() {
             rewardValString = rewardVal.toString();
             document.getElementById('reward').textContent += rewardValString;
+        }
+    };
+
+    var dicRewardScreen2 = {
+        type: 'html-keyboard-response',
+        stimulus: "<p>You earned the following amount of points from the division shown on the previous screen:</p>" +
+            "<div id = 'selfReward' style = 'float: center;'></div>" +
+            "<p>The charity you chose at the beginning of the experiment will receive the following amount of points:</p>" +
+            "<div id = 'otherReward' style = 'float: center;'></div>" +
+            "<p>Press the spacebar to continue.</p>",
+        choices: [32],
+        on_load: function dispReward2() {
+            selfRewardString = selfReward.toString();
+            otherRewardString = otherReward.toString();
+            document.getElementById('selfReward').textContent += selfRewardString;
+            document.getElementById('otherReward').textContent += otherRewardString;
         },
+        on_start: function () {
+            if (rewardObj.mag == "high") { //This means that the total points is 32
+                var total = 32;
+            } else { //This means that the total points is 1.6
+                var total = 1.6;
+            }
+            if (rewardObj.choseLeft == true) {
+                window.selfReward = total * (rewardObj.leftLab / 100); //Use left label to determine reward
+            } else {
+                window.selfReward = total * (rewardObj.rightLab / 100); //Use right label to determine reward
+            }
+            window.otherReward = total - selfReward;
+        }
+    };
+
+    var lotRewardScreens = {
+        timeline: [lotRewardScreen1, lotRewardScreen2],
         conditional_function: function () {
             if (rewardObj.type == "gamble") {
                 return true;
@@ -1583,19 +1625,11 @@
                 return false;
             }
         }
-    };
-    timeline.push(lotRewardScreen);
+    }
+    timeline.push(lotRewardScreens);
 
-    var dicRewardScreen = {
-        type: 'html-keyboard-response',
-        stimulus: "<p>You earned the following amount of points from the division shown on the previous screen:</p>" +
-            "<div id = 'reward' style = 'float: center;'></div>" +
-            "<p>Press the spacebar to continue.</p>",
-            choices: [32],
-        on_load: function dispReward2() {
-            rewardValString = rewardVal.toString();
-            document.getElementById('reward').textContent += rewardValString;
-        },
+    var dicRewardScreens = {
+        timeline: [dicRewardScreen1, dicRewardScreen2],
         conditional_function: function () {
             if (rewardObj.type == "allocation") {
                 return true;
@@ -1603,8 +1637,8 @@
                 return false;
             }
         }
-    };
-    timeline.push(dicRewardScreen);
+    }
+    timeline.push(dicRewardScreens);
 
 
     var end = {
