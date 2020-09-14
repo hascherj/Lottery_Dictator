@@ -2,17 +2,19 @@
 <html>
 
 <head>
-    <title>Lottery</title>
+    <title>Lottery/Dictator</title>
     <script src="static/js/jspsych.js"></script>
     <script
         src="static/js/jspsych-html-keyboard-response.js"></script>
     <script
         src="static/js/jspsych-image-keyboard-response.js"></script>
     <script
-        src="static/js/spsych-image-slider-response.js"></script>
+        src="static/js/jspsych-image-slider-response.js"></script>
     <script src="static/js/jspsych-xab.js"></script>
     <script
-        src="static/js/jspsych-binary-choice-shifted.js"></script>
+        src="static/js/jspsych-econ-choice.js"></script>
+    <script
+        src="static/js/jspsych-image-button-response.js"></script>
     <script src="static/js/jspsych-fullscreen.js"></script>
     <script
         src="static/js/jspsych-combinations.js"></script>
@@ -20,6 +22,7 @@
     <link href="static/css/jspsych.css" rel="stylesheet"
         type="text/css">
     </link>
+    <script src="static/js/image-picker/image-picker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="myChart" width='100' height='100'></canvas>
 </head>
@@ -125,7 +128,7 @@
             continue;
         };
         highB_lottery_imgs.push('Lottery_Imgs/HighB' + i * 10 + 'percent.jpg');
-    }''
+    };
 
     var high_lott_pairs = [];
     for (j = 0; j < highA_lottery_imgs.length - 1; j++) {
@@ -353,9 +356,37 @@
 
     // CHARITY IMAGES
     var dir2 = 'Charity_Imgs/';
-    var charity_imgs = [dir2 + 'Animal Rescue.JPG', dir2 + 'Brain Tumor Society.JPG', dir2 + 'Coast Guard Foundation.JPG', dir2 + 'Infant Crisis Services.JPG',
-    dir2 + 'Library Foundation of Los Angeles.JPG', dir2 + 'National Pediatric Cancer Foundation.JPG', dir2 + "National Transplant Assistance Fund", dir2 + "Orphan Outreach.JPG",
-    dir2 + "Parkinsons Disease Foundation.JPG", dir2 + 'Orangutan Foundation International.JPG'];
+    var charity_imgs = [dir2 + "Orphan Outreach.JPG", dir2 + 'Infant Crisis Services.JPG', dir2 + "Parkinsons Disease Foundation.JPG", dir2 + "Himalayan Cataract Project.JPG"];
+    var charity_img = 'Charity_Imgs/charityCombined.png'
+
+    // CHARITY SELECTION [IN PROGRESS]
+    var charSelect = {
+        type: "image-button-response",
+        stimulus: charity_img,
+        choices: ["Orphan Outreach", "Infant Crisis Services", "Parkinson's Foundation", "Himalayan Cataract Project"],
+        prompt: "<p>Please select the charity that you would like to receive money at the end of the study.</p>",
+        margin_vertical: '20px',
+        margin_horizontal: '30px'
+    }
+
+    var charSelect2 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>This is the charity you selected:</p>" +
+        "<div style = 'float: center;'>" +
+        "<img id = 'img1' style = 'width: 450px; height: 350px;'></img></div>" +
+        "<p>Press the spacebar to continue</p>",
+        on_load: function dispStim() {
+            document.getElementById('img1').src = chosenCharImg;
+        },
+        on_start: function(data) {
+            button = jsPsych.data.get().last(1).values()[0].button_pressed;
+            buttonNum = Number(button);
+            chosenCharImg = charity_imgs[buttonNum];
+            data.Charity = chosenCharImg;
+        },
+        choices: [32]
+    }
+
 
     //LOTTERY INSTRUCTIONS AND PRACTICE SCREENS
 
@@ -425,7 +456,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: [high_lott_pairs[1][0].stim, high_lott_pairs[1][1].stim],
                 choices: ["F", "J"]
             }
@@ -446,20 +477,20 @@
     //timeline.push(lotInstructions4);
 
     var lotPractice1 = {
-        type: "binary-choice-shifted",
+        type: "econ-choice",
         stimulus: [low_lott_pairs[0][0].stim, low_lott_pairs[0][1].stim],
         choices: ["F", "J"]
     };
     //timeline.push(fixation, lotPractice1);
 
     var lotPractice2 = {
-        type: 'binary-choice-shifted',
+        type: 'econ-choice',
         stimulus: [high_lott_pairs[0][0].stim, high_lott_pairs[0][1].stim],
         choices: ["F", "J"]
     };
 
     var lotPractice3 = {
-        type: "binary-choice-shifted",
+        type: "econ-choice",
         stimulus: [low_lott_pairs[1][0].stim, low_lott_pairs[1][1].stim],
         choices: ["F", "J"]
     }
@@ -674,8 +705,8 @@
 
     var dicInstructions1 = {
         type: "html-keyboard-response",
-        stimulus: "<p>In this task, you will be making decisions about how many points" +
-            "you would like to divide  between yourself and a charity of your choice. At the start " +
+        stimulus: "<p>In this task, you will be making decisions about how many points " +
+            "you would like to divide between yourself and a charity of your choice. At the start " +
             "of each round, you will be told that you are given some amount of task points. " +
             "You will then decide between two different divisions of those points.</p>" +
             "<p>Press the spacebar to continue.</p>",
@@ -684,13 +715,21 @@
     };
     //timeline.push(dicInstructions1);
 
+    var dicInstructions1_2 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>You will now choose the charity that will receive the portion of the division " +
+            "that is not given to you for each round. In other words, each division will allocate some " +
+            "of the total points for the round to you and the rest to the charity.</p>" + 
+            "<p>Press the spacebar to continue.</p>"
+    }
+
     var dicInstructions2 = {
         type: "html-keyboard-response",
-        stimulus: "<p>One division will be shown on the left side of the screen, and the other will " +
+        stimulus: "<p>Each round, one division will be shown on the left side of the screen, and the other will " +
             "be shown on the right. The portion of the total amount of points that you keep" +
             "will be represented by the upper bar graph in blue, and the portion that will be " +
-            "donated will be represented by the lower bar graph in red.</p><p>Here is an example " +
-            "division where you would get 80% of the total points, and the charity would receive 20%:</p>" +
+            "given to charity will be represented by the lower bar graph in red.</p><p>Here is an example " +
+            "division where you would get 80% of the total points, and the charity would receive the other 20%:</p>" +
             "<div style = 'float: center;'>" +
             "<img src = 'Dic_Imgs/80_20.jpg' style = 'width: 350px; height: 350px;'></img></div>" +
             "<p>Press the spacebar to continue.</p>",
@@ -741,7 +780,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: [dictator_stim[6], dictator_stim[2]],
                 choices: ["F", "J"]
             }
@@ -762,20 +801,20 @@
     //timeline.push(dicInstructions5);
 
     var dicPractice1 = {
-        type: "binary-choice-shifted",
+        type: "econ-choice",
         stimulus: [dictator_stim[5], dictator_stim[0]],
         choices: ["F", "J"]
     };
     //timeline.push(fixation, dicPractice1);
 
     var dicPractice2 = {
-        type: 'binary-choice-shifted',
+        type: 'econ-choice',
         stimulus: [dictator_stim[2], dictator_stim[6]],
         choices: ["F", "J"]
     };
 
     var dicPractice3 = {
-        type: "binary-choice-shifted",
+        type: "econ-choice",
         stimulus: [dictator_stim[1], dictator_stim[5]],
         choices: ["F", "J"]
     }
@@ -784,7 +823,7 @@
         type: 'html-keyboard-response',
         stimulus: "<p>Whoops! You responded too slowly. Let's try that again." +
             "Try to respond in less than 5.5 seconds. Remember, choose the <b>riskier</b> gamble.</p>" +
-            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to beign the next practice round.</p>",
         choices: [32]
     };
 
@@ -792,7 +831,7 @@
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. Let's try that again. " +
             "Make sure you take in the information before making a response. Remember, choose the <b>riskier</b> gamble.</p>" +
-            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the next practice round.</p>",
         chocies: [32]
     };
 
@@ -800,8 +839,24 @@
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the side where you earn more, relative to the charity. In " +
             "other words, choose the side that gives you a higher reward and the charity a smaller reward.</p>" +
-            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the next practice round.</p>",
         choices: [32]
+    };
+
+    var dic_err_slow_last = {
+        type: 'html-keyboard-response',
+        stimulus: "<p>Whoops! You responded too slowly. " +
+            "Remember, try to respond in less than 5.5 seconds.</p>" +
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to continue.</p>",
+        choices: [32]
+    };
+
+    var dic_err_fast_last = {
+        type: "html-keyboard-response",
+        stimulus: "<p>Whoops! You responded too quickly. " +
+            "Make sure you take in the information before making a response.</p>" +
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to continue.</p>",
+        chocies: [32]
     };
 
     var dic_err_acc_last = {
@@ -955,7 +1010,7 @@
 
     // DICTATOR PRACTICE TIMELINE
     var dic_practice_timeline = {
-        timeline: [dicInstructions0, dicInstructions1, dicInstructions2, dicInstructions3, dicInstructions4, dicExample, dicInstructions5, fixation, dicPractice1,
+        timeline: [dicInstructions0, dicInstructions1, dicInstructions1_2, charSelect, charSelect2, dicInstructions2, dicInstructions3, dicInstructions4, dicExample, dicInstructions5, fixation, dicPractice1,
             dic_conditional_fast, dic_conditional_slow, dic_conditional_incorrect, dic_conditional2_slow, dic_conditional2_fast, dic_conditional2_incorrect,
             dic_conditional3_slow, dic_conditional3_fast, dic_conditional3_incorrect, practiceEnd]
     };
@@ -1010,7 +1065,8 @@
 
     var lotCounterBal = Math.random();
     var dicCounterBal = Math.random();
-    var lot_dic_CounterBal = Math.random();
+    //var lot_dic_CounterBal = Math.random();
+    var lot_dic_CounterBal = .7; //TESTING DIC
 
     // LOTTERY PROCEDURES
 
@@ -1023,7 +1079,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish: (data) => {
@@ -1068,7 +1124,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish: (data) => {
@@ -1115,7 +1171,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish: (data) => {
@@ -1156,7 +1212,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish: (data) => {
@@ -1197,7 +1253,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish: (data) => {
@@ -1238,7 +1294,7 @@
             },
             fixation,
             {
-                type: "binary-choice-shifted",
+                type: "econ-choice",
                 stimulus: jsPsych.timelineVariable('choice'),
                 choices: ["F", "J"],
                 on_finish: (data) => {
@@ -1327,7 +1383,7 @@
     var endAll = {
         type: "html-keyboard-response",
         on_start: function (data) {
-            rewardData = jsPsych.data.get().filter({ trial_type: 'binary-choice-shifted', isReal: true, task: "allocation" }).values();
+            rewardData = jsPsych.data.get().filter({ trial_type: 'econ-choice', isReal: true, task: "allocation" }).values();
             window.rewardObj = jsPsych.randomization.sampleWithoutReplacement(rewardData, 1)[0];
             if (rewardObj.key_press === 70) {
                 window.choseLeft = true;
