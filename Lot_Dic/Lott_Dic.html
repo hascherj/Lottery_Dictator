@@ -405,9 +405,9 @@
 
     var lotInstructions1 = {
         type: "html-keyboard-response",
-        stimulus: "<p>In this task, you will make decisions between pairs of gambles over 8 rounds." +
-            "Four of these gambles will be used to determine your reward at the end of the" +
-            "study. You will be told which four gambles are real. One of the real gambles" +
+        stimulus: "<p>In this task, you will make decisions between pairs of gambles over 8 rounds. " +
+            "Four of these gambles will be used to determine your reward at the end of the " +
+            "study. You will be told which four gambles are real. One of the real gambles " +
             "will be chosen at random and played out at the end of the study, and your " +
             "reward will be determined based on that gamble's outcome.</p>" +
             "<p>The four other gambles are hypothetical: they will not impact your reward.</p>" +
@@ -432,8 +432,8 @@
     var lotInstructions3 = {
         type: "html-keyboard-response",
         stimulus: "<p>You will now see an example round. First, a cross will be displayed in the " +
-            "center of the screen. Next, two gambles will be shown on the screen, and you will" +
-            "select which gamble you would prefer to play.</p><p>Use the <b>F</b> key to choose the" +
+            "center of the screen. Next, two gambles will be shown on the screen, and you will " +
+            "select which gamble you would prefer to play.</p><p>Use the <b>F</b> key to choose the " +
             "gamble on the left and the <b>J</b> key to choose the gamble on the right.</p>" +
             "<p>The potential outcomes of each gamble are shown in text, and the probability of each " +
             "outcome is represented by the area of the pie that is filled in.</p>" +
@@ -448,8 +448,8 @@
             {
                 type: "html-keyboard-response",
                 stimulus: "<p>In this example, both gambles have a 30% chance for the larger reward " +
-                    "and a 70% chance for the smaller reward.</p>" +
-                    "<p>Note that in the actual rounds, you will <b>NOT</b> be told the probability of each" +
+                    "and a 70% chance for the smaller reward.</p><p>In this round, you are free to choose either the left (<b>F</b>) or right (<b>J</b>) option.</p>" +
+                    "<p>Note that in the actual rounds, you will <b>NOT</b> be told the probability of each " +
                     "outcome. You must use the relative sizes of the filled in areas of the pie to make your choice.</p>" +
                     "<p>Rest your fingers on the F and J keys, and press the spacebar to begin the example round.</p>",
                 choices: [32]
@@ -468,7 +468,11 @@
         type: "html-keyboard-response",
         stimulus: "<p>You will now complete a practice round to ensure that you understand " +
             "how the gambles work. In this round, we want you to choose the " +
+<<<<<<< HEAD
+            "gamble that has a chance to win the largest possible outcome on the screen. " +
+=======
             "gamble that has a chance to win the largest possible amount on the screen. " +
+>>>>>>> master
             "Be sure to take in the information in each gamble, but try to respond within " +
             "5.5 seconds. We will let you know if your response was too fast or too slow.</p>" +
             "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
@@ -497,8 +501,13 @@
 
     var lot_err_slow = {
         type: 'html-keyboard-response',
+<<<<<<< HEAD
+        stimulus: "<p>Whoops! You responded too slowly. Let's try that again. " +
+            "Try to respond in less than 5.5 seconds. Remember, choose the gamble that could reward the largest possible outcome on the screen.</p>" +
+=======
         stimulus: "<p>Whoops! You responded too slowly. Let's try that again." +
             "Try to respond in less than 5.5 seconds. Remember, choose the gamble that could reward the highest possible amount on the screen.</p>" +
+>>>>>>> master
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
         choices: [32]
     };
@@ -506,7 +515,11 @@
     var lot_err_fast = {
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. Let's try that again. " +
+<<<<<<< HEAD
+            "Make sure you take in the information before making a response. Remember, choose the choose the gamble that could reward the largest possible outcome on the screen.</p>" +
+=======
             "Make sure you take in the information before making a response. Remember, choose the choose the gamble that could reward the highest possible amount on the screen.</p>" +
+>>>>>>> master
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
         chocies: [32]
     };
@@ -527,7 +540,11 @@
 
     var lot_err_acc = {
         type: "html-keyboard-response",
+<<<<<<< HEAD
+        stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the choose the gamble that could reward the largest possible outcome on the screen</p>" +
+=======
         stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the choose the gamble that could reward the highest possible amount on the screen</p>" +
+>>>>>>> master
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
         choices: [32]
     };
@@ -706,7 +723,11 @@
         type: "html-keyboard-response",
         stimulus: "<p>In this task, you will be making decisions about how many points " +
             "you would like to divide between yourself and a charity of your choice. At the start " +
+<<<<<<< HEAD
+            "of each round, you will be told that you are given some amount of points. " +
+=======
             "of each round, you will be told that you are given some amount of task points. " +
+>>>>>>> master
             "You will then decide between two different divisions of those points.</p>" +
             "<p>Press the spacebar to continue.</p>",
         //post_trial_gap: 2000,
@@ -716,19 +737,32 @@
 
     var dicInstructions1_2 = {
         type: "html-keyboard-response",
+<<<<<<< HEAD
+        stimulus: "<p>You will now choose the charity that will receive some portion of the points " +
+            "each round. In other words, each round you will select a division of points that will " +
+            "send some portion of the points to the charity while you keep the other portion.</p>" + 
+=======
         stimulus: "<p>You will now choose the charity that will receive the portion of the division " +
             "that is not given to you for each round. In other words, each division will allocate some " +
             "of the total points for the round to you and the rest to the charity.</p>" + 
+>>>>>>> master
             "<p>Press the spacebar to continue.</p>"
     }
 
     var dicInstructions2 = {
         type: "html-keyboard-response",
         stimulus: "<p>Each round, one division will be shown on the left side of the screen, and the other will " +
+<<<<<<< HEAD
+            "be shown on the right. The portion of the total amount of points that you keep will be " +
+            "represented by the upper bar graph in blue, and the portion that will be given to charity " +
+            "will be represented by the lower bar graph in red.</p><p>Here is an example " +
+            "division where you would get 80% of the total points, and the charity would receive the other 20%</p>" +
+=======
             "be shown on the right. The portion of the total amount of points that you keep" +
             "will be represented by the upper bar graph in blue, and the portion that will be " +
             "given to charity will be represented by the lower bar graph in red.</p><p>Here is an example " +
             "division where you would get 80% of the total points, and the charity would receive the other 20%:</p>" +
+>>>>>>> master
             "<div style = 'float: center;'>" +
             "<img src = 'Dic_Imgs/80_20.jpg' style = 'width: 350px; height: 350px;'></img></div>" +
             "<p>Press the spacebar to continue.</p>",
@@ -740,11 +774,11 @@
     var dicInstructions3 = {
         type: "html-keyboard-response",
         stimulus: "<p>Some of the rounds are hypothetical: they will not affect the amount " +
-            "of points you (or the charity) will actually receive at the end of the study. " +
-            "The other rounds, however, are real, and one of them will be randomly selected at the end " +
+            "of points you (or the charity) will receive at the end of the study. Other " +
+            "rounds are real, and one of them will be randomly selected at the end " +
             "of the study to determine how many points you and the charity receive. " +
-            "Because one of the real rounds is selected at random, you should treat each decision " +
-            "independently: your choice in one round will not affect the outcome of any other round.</p>" +
+            "Because one of the real rounds will be selected at random, you should treat each decision " +
+            "independently: your choice in one round will not affect the outcome in any other round.</p>" +
             "<p>Press the spacebar to continue.</p>",
         //post_trial_gap: 2000,
         choices: [32]
@@ -756,7 +790,7 @@
         type: "html-keyboard-response",
         stimulus: "<p>You will now see an example round. First, a cross will be displayed in " +
             "the center of the screen. Then, two point divisions will be shown on the screen, " +
-            "and you will select the devision you would prefer.</p><p>Use the <b>F</b> key to " +
+            "and you will select the devision that you would prefer.</p><p>Use the <b>F</b> key to " +
             "choose the division on the left and the <b>J</b> key to choose the division on the right.</p>" +
             "<p>You will be told the total amount of points before each round.</p>" +
             "<p>Press the spacebar to continue.</p>",
@@ -769,9 +803,9 @@
         timeline: [
             {
                 type: "html-keyboard-response",
-                stimulus: "<p>In this example, the total is 10 points. The right division " +
-                    "is 75% (7.5) for you and 25% (2.5) for the charity, while the left division is " +
-                    "95% (9.5) for you and 5% (0.5) for the charity.</p>" +
+                stimulus: "<p>In this example, the total is 10 points. The right division is 75% (7.5) " +
+                    "for you and 25% (2.5) for the charity, while the left division is 95% (9.5) for you" +
+                    "and 5% (0.5) for the charity.</p><p>In this round, you are free to choose either the left (<b>F</b>) or right (<b>J</b>) division.</p>" +
                     "<p>Note that in the actual rounds, you will <b>NOT</b> be told the actual percentages in " +
                     "each graph. You must use the relative sizes of the graphs to make your choice.</p>" +
                     "<p>Rest your fingers on the F and J keys, and press the spacebar to begin the example round.</p>",
@@ -792,7 +826,7 @@
         stimulus: "<p>You will now complete a practice round to ensure that you understand " +
             "how the graphs work. In this round, we want you to choose the " +
             "division of points that gives more points to you and less to the charity. " +
-            "Be sure to take in the information on each side, but try to respond within" +
+            "Be sure to take in the information on each side, but try to respond within " +
             "5.5 seconds. We will let you know if your response was too fast or too slow.</p>" +
             "<p>Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
         choices: [32]
@@ -839,6 +873,7 @@
         stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the side where you earn more, relative to the charity. In " +
             "other words, choose the side that gives you a higher reward and the charity a smaller reward.</p>" +
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the next practice round.</p>",
+<<<<<<< HEAD
         choices: [32]
     };
 
@@ -850,6 +885,19 @@
         choices: [32]
     };
 
+=======
+        choices: [32]
+    };
+
+    var dic_err_slow_last = {
+        type: 'html-keyboard-response',
+        stimulus: "<p>Whoops! You responded too slowly. " +
+            "Remember, try to respond in less than 5.5 seconds.</p>" +
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to continue.</p>",
+        choices: [32]
+    };
+
+>>>>>>> master
     var dic_err_fast_last = {
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. " +
@@ -860,7 +908,7 @@
 
     var dic_err_acc_last = {
         type: 'html-keyboard-response',
-        stimulus: "<p>You failed to choose the correct side. Remember, your portion of the points is" +
+        stimulus: "<p>You failed to choose the correct side. Remember, your portion of the points is " +
             "represented by the blue bar, and the charity's portion is represented by the red bar.</p>" +
             "<p>Press the space bar to continue.</p>",
         choices: [32]
@@ -1017,13 +1065,13 @@
     // LOTTERY REAL/HYPOTHETICAL INSTRUCTIONS
 
     var lotRealInstruc =
-        "<p>The following decision will use <strong>REAL</strong> gambles, " +
+        "<p>The following round will use <strong>REAL</strong> gambles, " +
         "which means that the gamble you choose could be used at the " +
         "end of the study to determine your reward.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
 
     var lotHypInstruc =
-        "<p>The following decision will use <strong>HYPOTHETICAL</strong> gambles, " +
+        "<p>The following round will use <strong>HYPOTHETICAL</strong> gambles, " +
         "which means that the gamble you choose will <strong>NOT</strong> be used at the " +
         "end of the study to determine your reward.</p>" +
         "<p>Rest your fingers on the F and J keys, and press the spacebar to continue.</p>";
