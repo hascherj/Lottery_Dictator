@@ -35,6 +35,7 @@
     var testing = false;
     // CREATE TIMELINE
     var timeline = [];
+    trial_count = 0;
 
     // FULLSCREEN
     var fullscreen = {
@@ -1089,6 +1090,8 @@
                     data.perc = jsPsych.timelineVariable('perc', true);
                     data.base = jsPsych.timelineVariable('base', true);
                     data.leftLab = jsPsych.timelineVariable('leftLab', true);
+                    data.trialN = trial_count;
+                    trial_count++;
                 }
             }
         ],
@@ -1135,6 +1138,8 @@
                     data.base = jsPsych.timelineVariable('base', true);
                     data.leftLab = jsPsych.timelineVariable('leftLab', true);
                     data.rightLab = NaN;
+                    data.trialN = trial_count;
+                    trial_count++;
                 }
             }
         ],
@@ -1182,6 +1187,8 @@
                     data.base = NaN;
                     data.leftLab = jsPsych.timelineVariable('leftLab', true);
                     data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                    data.trialN = trial_count;
+                    trial_count++;
                 }
             }
         ],
@@ -1223,6 +1230,8 @@
                     data.base = NaN;
                     data.leftLab = jsPsych.timelineVariable('leftLab', true);
                     data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                    data.trialN = trial_count;
+                    trial_count++;
                 }
             }
         ],
@@ -1264,6 +1273,8 @@
                     data.base = NaN;
                     data.leftLab = jsPsych.timelineVariable('leftLab', true);
                     data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                    data.trialN = trial_count;
+                    trial_count++;
                 }
             }
         ],
@@ -1305,6 +1316,8 @@
                     data.base = NaN;
                     data.leftLab = jsPsych.timelineVariable('leftLab', true);
                     data.rightLab = jsPsych.timelineVariable('rightLab', true);
+                    data.trialN = trial_count;
+                    trial_count++;
                 }
             }
         ],
