@@ -47,7 +47,7 @@ jsPsych.plugins["binary-choice-shifted"] = (function () {
     trial.choices = trial.choices || [];
     //trial.timing_stim = trial.timing_stim || -1;
     trial.timing_response = trial.timing_response || -1;
-    var selected_color = 'rgb(5, 157, 190)';
+    var selected_color = 'rgb(0, 0, 0)';
     var setTimeoutHandlers = [];
     var keyboardListener;
    
@@ -70,10 +70,10 @@ jsPsych.plugins["binary-choice-shifted"] = (function () {
     
       new_html += '<div class="container-multi-choice">';
       new_html += '<div class="container-multi-choice-column" id= "multiattribute-choices-stimulus-left" style ="position:fixed; TOP:50%; LEFT:35%; transform: translate(-50%, -50%); line-height: 0" >';
-      new_html += `<div id="multiattribute-choices-stimulus-left" ><img style = "HEIGHT:150px; WIDTH:150px" src="${trial.stimulus[0]}"/></div>`;
+      new_html += `<div id="multiattribute-choices-stimulus-left" ><img style = "HEIGHT:300px; WIDTH:300px" src="${trial.stimulus[0]}"/></div>`;
       new_html += '</div>';
       new_html += '<div class="container-multi-choice-column" id= "multiattribute-choices-stimulus-right" style="position:fixed; TOP:50%; LEFT:65%; transform: translate(-50%, -50%); line-height: 0">';
-      new_html += `<div id="multiattribute-choices-stimulus-right" ><img style = "HEIGHT:150px; WIDTH:150px" src="${trial.stimulus[1]}"/ ></div>`;
+      new_html += `<div id="multiattribute-choices-stimulus-right" ><img style = "HEIGHT:300px; WIDTH:300px" src="${trial.stimulus[1]}"/ ></div>`;
       new_html += '</div>';
       new_html += '<div id="binary-timeoutinfo"></div>';
       new_html += '</div>';

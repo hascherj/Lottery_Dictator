@@ -468,7 +468,11 @@
         type: "html-keyboard-response",
         stimulus: "<p>You will now complete a practice round to ensure that you understand " +
             "how the gambles work. In this round, we want you to choose the " +
+<<<<<<< HEAD
             "gamble that has a chance to win the largest possible outcome on the screen. " +
+=======
+            "gamble that has a chance to win the largest possible amount on the screen. " +
+>>>>>>> master
             "Be sure to take in the information in each gamble, but try to respond within " +
             "5.5 seconds. We will let you know if your response was too fast or too slow.</p>" +
             "Rest your fingers on the F and J keys, and press the spacebar to begin.</p>",
@@ -497,8 +501,13 @@
 
     var lot_err_slow = {
         type: 'html-keyboard-response',
+<<<<<<< HEAD
         stimulus: "<p>Whoops! You responded too slowly. Let's try that again. " +
             "Try to respond in less than 5.5 seconds. Remember, choose the gamble that could reward the largest possible outcome on the screen.</p>" +
+=======
+        stimulus: "<p>Whoops! You responded too slowly. Let's try that again." +
+            "Try to respond in less than 5.5 seconds. Remember, choose the gamble that could reward the highest possible amount on the screen.</p>" +
+>>>>>>> master
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
         choices: [32]
     };
@@ -506,7 +515,11 @@
     var lot_err_fast = {
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. Let's try that again. " +
+<<<<<<< HEAD
             "Make sure you take in the information before making a response. Remember, choose the choose the gamble that could reward the largest possible outcome on the screen.</p>" +
+=======
+            "Make sure you take in the information before making a response. Remember, choose the choose the gamble that could reward the highest possible amount on the screen.</p>" +
+>>>>>>> master
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
         chocies: [32]
     };
@@ -527,7 +540,11 @@
 
     var lot_err_acc = {
         type: "html-keyboard-response",
+<<<<<<< HEAD
         stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the choose the gamble that could reward the largest possible outcome on the screen</p>" +
+=======
+        stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the choose the gamble that could reward the highest possible amount on the screen</p>" +
+>>>>>>> master
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the practice round.</p>",
         choices: [32]
     };
@@ -706,7 +723,11 @@
         type: "html-keyboard-response",
         stimulus: "<p>In this task, you will be making decisions about how many points " +
             "you would like to divide between yourself and a charity of your choice. At the start " +
+<<<<<<< HEAD
             "of each round, you will be told that you are given some amount of points. " +
+=======
+            "of each round, you will be told that you are given some amount of task points. " +
+>>>>>>> master
             "You will then decide between two different divisions of those points.</p>" +
             "<p>Press the spacebar to continue.</p>",
         //post_trial_gap: 2000,
@@ -716,19 +737,32 @@
 
     var dicInstructions1_2 = {
         type: "html-keyboard-response",
+<<<<<<< HEAD
         stimulus: "<p>You will now choose the charity that will receive some portion of the points " +
             "each round. In other words, each round you will select a division of points that will " +
             "send some portion of the points to the charity while you keep the other portion.</p>" + 
+=======
+        stimulus: "<p>You will now choose the charity that will receive the portion of the division " +
+            "that is not given to you for each round. In other words, each division will allocate some " +
+            "of the total points for the round to you and the rest to the charity.</p>" + 
+>>>>>>> master
             "<p>Press the spacebar to continue.</p>"
     }
 
     var dicInstructions2 = {
         type: "html-keyboard-response",
         stimulus: "<p>Each round, one division will be shown on the left side of the screen, and the other will " +
+<<<<<<< HEAD
             "be shown on the right. The portion of the total amount of points that you keep will be " +
             "represented by the upper bar graph in blue, and the portion that will be given to charity " +
             "will be represented by the lower bar graph in red.</p><p>Here is an example " +
             "division where you would get 80% of the total points, and the charity would receive the other 20%</p>" +
+=======
+            "be shown on the right. The portion of the total amount of points that you keep" +
+            "will be represented by the upper bar graph in blue, and the portion that will be " +
+            "given to charity will be represented by the lower bar graph in red.</p><p>Here is an example " +
+            "division where you would get 80% of the total points, and the charity would receive the other 20%:</p>" +
+>>>>>>> master
             "<div style = 'float: center;'>" +
             "<img src = 'Dic_Imgs/80_20.jpg' style = 'width: 350px; height: 350px;'></img></div>" +
             "<p>Press the spacebar to continue.</p>",
@@ -839,6 +873,7 @@
         stimulus: "<p>Whoops! Let's try that again. Remember, we want you to choose the side where you earn more, relative to the charity. In " +
             "other words, choose the side that gives you a higher reward and the charity a smaller reward.</p>" +
             "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to begin the next practice round.</p>",
+<<<<<<< HEAD
         choices: [32]
     };
 
@@ -850,6 +885,19 @@
         choices: [32]
     };
 
+=======
+        choices: [32]
+    };
+
+    var dic_err_slow_last = {
+        type: 'html-keyboard-response',
+        stimulus: "<p>Whoops! You responded too slowly. " +
+            "Remember, try to respond in less than 5.5 seconds.</p>" +
+            "<p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys, and press the spacebar to continue.</p>",
+        choices: [32]
+    };
+
+>>>>>>> master
     var dic_err_fast_last = {
         type: "html-keyboard-response",
         stimulus: "<p>Whoops! You responded too quickly. " +
